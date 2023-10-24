@@ -1,0 +1,24 @@
+#cuerpo div{
+    background-color: #83C2CF;
+    width: 50%;
+    text-align: center;
+}
+
+#cuerpo{
+    text-align: center;
+}
+
+#usuario{
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+#usuario #lblUsuario{
+    margin-bottom: 5%;
+}
+
+#contraseña{
+    margin-bottom: 2%;
+}
+
+
