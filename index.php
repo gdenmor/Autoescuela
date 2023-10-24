@@ -51,7 +51,7 @@
 
 <?php
     require_once "REPOSITORYS/USER_REPOSITORY.php";
-    require_once "../ENTITYS/USER.php";
+    require_once "ENTITYS/USER.php";
     require_once "../HELPERS/SESSION.php";
 
 
