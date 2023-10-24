@@ -69,7 +69,7 @@
         public static function UpdateById($id,$objetoActualizado){
             $conexion=CONEXION::AbreConexion();
 
-            $resultado=$conexion->exec("UPDATE from USUARIO set nombre=$objetoActualizado->nombre, contraseña=$objetoActualizado->contraseña where id=$id");
+            $resultado=$conexion->exec("UPDATE from USUARIO set nombre=$objetoActualizado->nombre, contraseña=$objetoActualizado->contraseña, rol=$objetoActualizado-> where id=$id");
         }
         public static function Insert($objeto){
             $conexion=CONEXION::AbreConexion();
