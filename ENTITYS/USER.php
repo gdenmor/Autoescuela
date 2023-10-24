@@ -5,7 +5,7 @@
         private $password;
         private $rol;
 
-        public function __construct($id, $username, $password, $rol, $misIntentos){
+        public function __construct($id, $username, $password, $rol){
             $this->id = $id;
             $this->username = $username;
             $this->password = $password;
