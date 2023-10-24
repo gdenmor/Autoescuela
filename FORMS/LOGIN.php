@@ -1,6 +1,7 @@
 <?php
     require_once "../REPOSITORYS/USER_REPOSITORY.php";
     require_once "../ENTITYS/USER.php";
+    require_once "../HELPERS/SESSION.php";
 
 
 
@@ -23,11 +24,11 @@
         }
 
         if ($existe){
-            echo "Este usuario ya existe";
+            echo "Este usuario ya existe. Introduzca otra contraseña";
         }else{
             $User=new USER($usuario,$password,null);
             USER_REPOSITORY::Insert($User);
-            echo "Se ha registrado correctamente";
+            CreaSesion();
         }
     }
 

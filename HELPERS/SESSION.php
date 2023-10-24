@@ -19,6 +19,7 @@
 
     function CreaSesion() {
         session_start();
+        //header("Location: $redireccion");
     }
 
 
