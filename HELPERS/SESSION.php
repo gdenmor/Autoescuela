@@ -1,8 +1,9 @@
 <?php
-    require_once 'REPOSITORYS/USER_REPOSITORY.php';
-    function iniciaSesion($clave,$valor){
-        session_start();
+    require_once '../REPOSITORYS/USER_REPOSITORY.php';
+    function iniciaSesion($clave,$valor,$redireccion){
+        CreaSesion();
         $_SESSION[$clave]=$valor;
+        header("Location: $redireccion");
     }
 
     function leer_session($clave) {
@@ -19,7 +20,6 @@
 
     function CreaSesion() {
         session_start();
-        //header("Location: $redireccion");
     }
 
 
