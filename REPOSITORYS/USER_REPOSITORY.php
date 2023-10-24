@@ -15,6 +15,7 @@
             $usuario=null;
             $contraseña=null;
             $rol=null;
+            $User=null;
 
 
             while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
@@ -23,13 +24,12 @@
                 $contrasenia=$tuplas->contraseña;
                 $rol=$tuplas->rol;
                 $User=new USER($id,$usuario,$contraseña,$rol);
-                $array[$i]=$User;
                 $i++;
             }
 
             
 
-            return $array;
+            return $User;
         }
         public static function FindAll(){
             $conexion=CONEXION::AbreConexion();
