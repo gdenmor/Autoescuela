@@ -1,7 +1,8 @@
 <?php
-    require_once "REPOSITORYS/USER_REPOSITORY.php";
+    require_once "../REPOSITORYS/USER_REPOSITORY.php";
+    require_once "../ENTITYS/USER.php";
 
-    
+
 
     $login=isset($_POST['login'])? $_POST['login']:"";
     $registro=isset($_POST['registro'])?$_POST['registro']:"";
@@ -13,7 +14,21 @@
     }
 
     if ($registro){
+        $existe=false;
+        $Usuarios=USER_REPOSITORY::FindAll();
+        for ($i= 0; $i < count($Usuarios); $i++){
+            if ($Usuarios[$i]->getUsername()==$usuario&& $Usuarios[$i]->getPassword()==$password){
+                $existe=true;
+            }
+        }
 
+        if ($existe){
+            echo "Este usuario ya existe";
+        }else{
+            $User=new USER($usuario,$password,null);
+            USER_REPOSITORY::Insert($User);
+            echo "Se ha registrado correctamente";
+        }
     }
 
     

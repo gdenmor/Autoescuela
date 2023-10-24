@@ -1,5 +1,5 @@
 <?php
-    require_once 'funcioneslogin.php';
+    require_once 'REPOSITORYS/USER_REPOSITORY.php';
     function iniciaSesion($clave,$valor){
         session_start();
         $_SESSION[$clave]=$valor;
@@ -10,12 +10,12 @@
         return $usuario;
     }
 
-    function Cerrar_Sesion() {
+    /*function Cerrar_Sesion() {
         if (isset($_SESSION['user'])){
             session_destroy();
             header("Location: http://localhost/PHP/index.php");
         }
-    }
+    }*/
 
     function CreaSesion() {
         session_start();

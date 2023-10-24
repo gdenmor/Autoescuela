@@ -1,10 +1,11 @@
 <?php
-    require_once "INTERFACES.php";
-    require_once "USER.php";
+    require_once "INTERFACE.php";
+    require_once "../ENTITYS/USER.php";
+    require_once "../REPOSITORYS/CONEXION.php";
     class USER_REPOSITORY implements BaseDeDatos{
-        public static function FindByID($id){
+        public static function FindByUsuario($usuario,$contraseña){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from USUARIO where id= $id");
+            $resultado=$conexion->query("SELECT * from USUARIO where nombre= $usuario and contraseña=$contraseña");
 
             $id=null;
 
@@ -23,7 +24,7 @@
                 $usuario=$tuplas->nombre;
                 $contrasenia=$tuplas->contraseña;
                 $rol=$tuplas->rol;
-                $User=new USER($id,$usuario,$contraseña,$rol);
+                $User=new USER($usuario,$contraseña,$rol);
                 $i++;
             }
 
@@ -51,7 +52,7 @@
                 $usuario=$tuplas->nombre;
                 $contrasenia=$tuplas->contraseña;
                 $rol=$tuplas->rol;
-                $User=new USER($id,$usuario,$contraseña,$rol);
+                $User=new USER($usuario,$contraseña,$rol);
                 $array[$i]=$User;
                 $i++;
             }
@@ -74,7 +75,11 @@
         public static function Insert($objeto){
             $conexion=CONEXION::AbreConexion();
 
-            $resultado=$conexion->exec("INSERT INTO USUARIO values ($objeto->id,$objeto->nombre,$objeto->contraseña,$objeto->rol)");
+            $usuario=$objeto->getUsername();
+            $password=$objeto->getPassword();
+            $rol=$objeto->getRol();
+
+            $resultado=$conexion->exec("INSERT INTO USUARIO (nombre, contraseña, rol) values ('$usuario','$password','$rol')");
         }
     }
 
