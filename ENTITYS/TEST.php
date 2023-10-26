@@ -4,12 +4,14 @@
         private $fechahora;
         private $Intento=[];
         private $User=[];
+        private $Preguntas=[];
 
-        public function __construct($id, $fechahora, $Intento, $User){
+        public function __construct($id, $fechahora, $Intento, $User, $Preguntas){
             $this->id = $id;
             $this->fechahora = $fechahora;
             $this->Intento = $Intento;
             $this->User=$User;
+            $this->Preguntas = $Preguntas;
         }
 
         public function getId(){
@@ -46,6 +48,14 @@
 
         public function setUser($User){
             $this->User = $User;
+        }
+
+        public function setPreguntas($Preguntas){
+            $this->Preguntas = $Preguntas;
+        }
+
+        public function getPreguntas(){
+            return $this->Preguntas;
         }
     }
 

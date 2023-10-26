@@ -43,16 +43,16 @@
             $i=0;
 
             $usuario=null;
-            $contraseña=null;
+            $contrasena=null;
             $rol=null;
 
 
             while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
                 $id=$tuplas->id;
                 $usuario=$tuplas->nombre;
-                $contrasenia=$tuplas->contraseña;
+                $contrasena=$tuplas->contraseña;
                 $rol=$tuplas->rol;
-                $User=new USER($usuario,$contraseña,$rol);
+                $User=new USER($usuario,$contrasena,$rol);
                 $array[$i]=$User;
                 $i++;
             }
@@ -67,10 +67,13 @@
             $resultado=$conexion->exec("DELETE * from producto where id=$id");
 
         }
-        public static function UpdateById($id,$objetoActualizado){
+        public static function UpdateById($user,$objetoActualizado){
             $conexion=CONEXION::AbreConexion();
+            $usuario=$objetoActualizado->getUsername();
+            $password=$objetoActualizado->getPassword();
+            $rol=$objetoActualizado->getRol();
 
-            $resultado=$conexion->exec("UPDATE from USUARIO set nombre=$objetoActualizado->nombre, contraseña=$objetoActualizado->contraseña, rol=$objetoActualizado-> where id=$id");
+            $resultado=$conexion->exec("UPDATE USUARIO set nombre='$user', contraseña='$password', rol='$rol' where nombre='$usuario'");
         }
         public static function Insert($objeto){
             $conexion=CONEXION::AbreConexion();
