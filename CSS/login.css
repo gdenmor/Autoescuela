@@ -1,7 +1,25 @@
-#cuerpo div{
+#cuerpo #contenedor{
     background-color: #83C2CF;
     width: 50%;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+#imagen{
+    width: 50%;
+    margin-left: 8%;
+    margin-bottom: 3%;
+    justify-content: center;
+}
+#imagen img{
+    width: 90%;
+}
+
+#contenedor{
+    justify-content: center;
 }
 
 #cuerpo{
@@ -9,12 +27,16 @@
     background-color: #83C2CF;
     padding: 0;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
 #usuario{
-    margin-bottom: 2%;
-    margin-left: 5%;
+    margin-bottom: 5%;
     text-align: center;
+    margin-left: 10%;
+    justify-content: center;
 }
 
 #usuario #lblUsuario{
@@ -23,7 +45,9 @@
 
 #contraseña{
     margin-bottom: 2%;
-    margin-left: 5%;
+    text-align: center;
+    margin-left: 10%;
+    justify-content: center;
 }
 
 #error{
@@ -31,13 +55,50 @@
 }
 
 .botones{
-    float: left;
+    text-align: center;
+    width: 45%;
+}
+
+.botones input{
+    width: 100%;
+    background-color: #746C6C;
+    color: #FFFF;
 }
 
 #diverror{
     margin-left: 2%;
 }
 
+#divbotones{
+    display: flex; /* Cambiado de inline-block a flex */
+    justify-content: space-between; /* Espacio entre los botones */
+    margin-left: 10%;
+    width: 100%;
+    margin-top: 10%;
+}
+
+#lblUsuario{
+    text-align: left;
+    height: 10%;
+}
+
+#contraseña #lblContrasena{
+    margin-bottom: 5%;
+    text-align: left;
+}
 
 
+#forgot_password{
+    text-align: center;
+    margin-top: 8%;
+    margin-left: 15%;
+}
 
+#forgot_password a{
+    color: black;
+    width: 100%;
+}
+
+#forgot_password a:hover{
+    color: aliceblue;
+}
