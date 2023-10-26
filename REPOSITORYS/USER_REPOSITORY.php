@@ -1,7 +1,7 @@
 <?php
     require_once "INTERFACE.php";
-    require_once "../ENTITYS/USER.php";
-    require_once "../REPOSITORYS/CONEXION.php";
+    require_once "ENTITYS/USER.php";
+    require_once "CONEXION.php";
     class USER_REPOSITORY implements BaseDeDatos{
         public static function FindByUsuario($usuario,$contraseña){
             $conexion=CONEXION::AbreConexion();

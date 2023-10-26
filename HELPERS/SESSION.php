@@ -1,5 +1,5 @@
 <?php
-    require_once '../REPOSITORYS/USER_REPOSITORY.php';
+    require_once 'REPOSITORYS/USER_REPOSITORY.php';
     function iniciaSesion($clave,$valor,$redireccion){
         CreaSesion();
         $_SESSION[$clave]=$valor;

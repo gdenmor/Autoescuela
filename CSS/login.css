@@ -6,10 +6,14 @@
 
 #cuerpo{
     text-align: center;
+    background-color: #83C2CF;
+    padding: 0;
+    margin: 0;
 }
 
 #usuario{
     margin-bottom: 2%;
+    margin-left: 5%;
     text-align: center;
 }
 
@@ -19,6 +23,21 @@
 
 #contraseña{
     margin-bottom: 2%;
+    margin-left: 5%;
 }
+
+#error{
+    color: red;
+}
+
+.botones{
+    float: left;
+}
+
+#diverror{
+    margin-left: 2%;
+}
+
+
 
 
