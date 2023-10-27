@@ -7,11 +7,14 @@
 
         
 
-        public function __construct($username, $password,$rol){
+        public function __construct($id,$username, $password,$rol){
+            $this->id = $id;
             $this->username = $username;
             $this->password = $password;
             $this->rol = $rol;
         }
+
+    
 
         public function getId(){
             return $this->id;

@@ -24,7 +24,7 @@
                 $usuario=$tuplas->nombre;
                 $contrasenia=$tuplas->contraseña;
                 $rol=$tuplas->rol;
-                $User=new USER($usuario,$contraseña,$rol);
+                $User=new USER($id,$usuario,$contraseña,$rol);
                 $i++;
             }
 
@@ -52,7 +52,7 @@
                 $usuario=$tuplas->nombre;
                 $contrasena=$tuplas->contraseña;
                 $rol=$tuplas->rol;
-                $User=new USER($usuario,$contrasena,$rol);
+                $User=new USER($id,$usuario,$contrasena,$rol);
                 $array[$i]=$User;
                 $i++;
             }
@@ -64,16 +64,16 @@
         public static function DeleteById($id){
             $conexion=CONEXION::AbreConexion();
 
-            $resultado=$conexion->exec("DELETE * from producto where id=$id");
+            $resultado=$conexion->exec("DELETE from producto where id=$id");
 
         }
-        public static function UpdateById($user,$objetoActualizado){
+        public static function UpdateById($id,$objetoActualizado){
             $conexion=CONEXION::AbreConexion();
             $usuario=$objetoActualizado->getUsername();
             $password=$objetoActualizado->getPassword();
             $rol=$objetoActualizado->getRol();
 
-            $resultado=$conexion->exec("UPDATE USUARIO set nombre='$user', contraseña='$password', rol='$rol' where nombre='$usuario'");
+            $resultado=$conexion->exec("UPDATE USUARIO set nombre='$usuario', contraseña='$password', rol='$rol' where id='$id'");
         }
         public static function Insert($objeto){
             $conexion=CONEXION::AbreConexion();
@@ -82,7 +82,37 @@
             $password=$objeto->getPassword();
             $rol=$objeto->getRol();
 
-            $resultado=$conexion->exec("INSERT INTO USUARIO (nombre, contraseña, rol) values ('$usuario','$password','$rol')");
+            $resultado=$conexion->exec("INSERT INTO USUARIO (nombre, contraseña, rol) values (upper('$usuario'),upper('$password'),upper('$rol'))");
+        }
+
+        public static function FindBy($id){
+            $conexion=CONEXION::AbreConexion();
+            $resultado=$conexion->query("SELECT * from USUARIO where id=$id");
+
+            $id=null;
+
+            $array=null;
+
+            $i=0;
+
+            $usuario=null;
+            $contraseña=null;
+            $rol=null;
+            $User=null;
+
+
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                $id=$tuplas->id;
+                $usuario=$tuplas->nombre;
+                $contrasenia=$tuplas->contraseña;
+                $rol=$tuplas->rol;
+                $User=new USER($id,$usuario,$contraseña,$rol);
+                $i++;
+            }
+
+            
+
+            return $User;
         }
     }
 

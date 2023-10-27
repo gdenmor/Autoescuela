@@ -8,8 +8,9 @@
 
             $login = isset($_POST['login']) ? $_POST['login'] : "";
             $registro = isset($_POST['registro']) ? $_POST['registro'] : "";
-            $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : "";
-            $password = isset($_POST['password']) ? $_POST['password'] : "";
+            $usuario = isset($_POST['usuario']) ? strtoupper(str_replace(" ","",$_POST['usuario'])) : "";
+            $password = isset($_POST['password']) ? strtoupper(str_replace(" ","",$_POST['password'])) : "";
+            $id=null;
 
 
             if ($_SERVER['REQUEST_METHOD']=="POST"){
@@ -17,55 +18,73 @@
                     $existe = false;
                     $User = null;
                     $Usuarios = USER_REPOSITORY::FindAll();
-                    for ($i = 0; $i < count($Usuarios); $i++) {
-                        if ($Usuarios[$i]->getUsername() == $usuario && $Usuarios[$i]->getPassword() == $password) {
-                            $User = $Usuarios[$i];
-                            $existe = true;
-                            $i=999;
-                        }
-                    }
-    
-                    if ($existe) {
-                        if ($User->getRol() !== "") {
-                            if ($User->getRol() == "ALUMNO") {
-                                iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/HTML/ALUMN_ROL.php");
-                            } else if ($User->getRol() == "PROFESOR") {
-                                iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/HTML/TEACHER_ROL.php");
+
+                    if (is_array($Usuarios) &&count($Usuarios)> 0) {
+
+                        for ($i = 0; $i < count($Usuarios); $i++) {
+                            if ($Usuarios[$i]->getUsername() == $usuario && $Usuarios[$i]->getPassword() == $password) {
+                                $User = $Usuarios[$i];
+                                $existe = true;
+                                $i=999;
                             }
-                        } else if ($User->getRol()==null){
-                            $mensajeError = "El usuario está a la espera de ser aprobado";
                         }
-                    } else {
-                        $mensajeError = "El usuario no existe";
+    
+                        if ($existe) {
+                            if ($User->getRol() !== "") {
+                                if ($User->getRol() == "ALUMNO") {
+                                    iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/HTML/ALUMN_ROL.php");
+                                } else if ($User->getRol() == "PROFESOR") {
+                                    iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/HTML/TEACHER_ROL.php");
+                                }
+                            } else if ($User->getRol()==null){
+                                $mensajeError = "El usuario está a la espera de ser aprobado";
+                            }
+                        } else {
+                            $mensajeError = "El usuario no existe";
+                        }
+                    }else {
+                        $mensajeError="El usuario no existe";
                     }
+                }
                 }
     
                 if ($registro) {
                     $existe = false;
                     $Usuarios = USER_REPOSITORY::FindAll();
-                    for ($i = 0; $i < count($Usuarios); $i++) {
-                        if ($Usuarios[$i]->getUsername() == $usuario && $Usuarios[$i]->getPassword() == $password || $Usuarios[$i]->getUsername() == $usuario) {
-                            $existe = true;
+
+                    if (is_array($Usuarios) && count($Usuarios) > 0) {
+                        
+                        for ($i = 0; $i < count($Usuarios); $i++) {
+                            if ($Usuarios[$i]->getUsername() == $usuario && $Usuarios[$i]->getPassword() == $password || $Usuarios[$i]->getUsername() == $usuario) {
+                                $existe = true;
+                            }
                         }
-                    }
     
-                    if ($existe) {
-                        $mensajeError = "El usuario ya existe";
-                    } else {
+                        if ($existe) {
+                            $mensajeError = "El usuario ya existe";
+                        } else {
+                            if ((strlen($usuario)>0&&strlen($usuario)<=45)&&(strlen($password)>0&&strlen($password)<=45)){
+                                $User = new USER($id,$usuario, $password, null);
+                                USER_REPOSITORY::Insert($User);
+                            }else{
+                                $mensajeError="Debe de tener entre 1 y 45 caracteres tanto el usuario como la contraseña";
+                            }
+                        }
+                    }else{
                         if ((strlen($usuario)>0&&strlen($usuario)<=45)&&(strlen($password)>0&&strlen($password)<=45)){
-                            $User = new USER($usuario, $password, null);
+                            $User = new USER($id,$usuario, $password, null);
                             USER_REPOSITORY::Insert($User);
                         }else{
                             $mensajeError="Debe de tener entre 1 y 45 caracteres tanto el usuario como la contraseña";
                         }
                     }
-                }
     
+    
+                }
+
                 if ($mensajeError != "") {
                     $mensajeError = '<p id="error">' . $mensajeError . '</p>';
                 }
-    
-            }
             
             ?>
 
