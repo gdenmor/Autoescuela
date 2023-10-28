@@ -5,7 +5,7 @@
     class USER_REPOSITORY implements BaseDeDatos{
         public static function FindByUsuario($usuario,$contraseña){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from USUARIO where nombre= $usuario and contraseña=$contraseña");
+            $resultado=$conexion->query("SELECT * from USUARIO where nombre= '$usuario' and contraseña= '$contraseña'");
 
             $id=null;
 
@@ -14,9 +14,9 @@
             $i=0;
 
             $usuario=null;
-            $contraseña=null;
             $rol=null;
             $User=null;
+            $contrasenia=null;
 
 
             while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
@@ -24,7 +24,7 @@
                 $usuario=$tuplas->nombre;
                 $contrasenia=$tuplas->contraseña;
                 $rol=$tuplas->rol;
-                $User=new USER($id,$usuario,$contraseña,$rol);
+                $User=new USER($id,$usuario,$contrasenia,$rol);
                 $i++;
             }
 

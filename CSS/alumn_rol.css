@@ -1,0 +1,63 @@
+body{
+    background-color: #83C2CF;
+}
+nav{
+    display: flex;
+    align-items: center;
+}
+
+.elementos{
+    margin-right: 20%;
+    display: flex;
+    align-items: center;
+}
+
+.elementos img{
+    width: 100%;
+}
+
+#menu{
+    background-color: #D0B97D;
+}
+
+.elementos #logo{
+    width: 60%;
+}
+
+.boton {
+    background-color: #333;
+    color: #fff;
+}
+
+.elementos_desplegable{
+    margin-top: 0.5%;
+    width: 10.3%;
+    background-color: #D0B97D;
+}
+
+.elementos_desplegable a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+#historico thead{
+    background-color: gray;
+}
+
+#historico{
+    margin-top: 2%;
+    background-color: white;
+}
+
+table{
+    width: 100%;
+}
+table tbody tr td{
+    text-align: center;
+}
+
+table thead tr td{
+    text-align: center;
+}
