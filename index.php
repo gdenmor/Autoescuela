@@ -128,7 +128,7 @@
                 </div>
             </div>
             <div id="forgot_password">
-                <a id="link" href="FORMS/FORGOT_PASSWORD.php" target="_blank">¿Has olvidado tu contraseña?</a>
+                <a id="link" href="FORMS/FORGOT_PASSWORD.php">¿Has olvidado tu contraseña?</a>
             </div>
 
             <div id="diverror">

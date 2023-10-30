@@ -7,7 +7,7 @@
     <script src="../JS/EXAMEN.js"></script>
 </head>
 <body>
-    <div>
+    <div id="container">
         <div id="foto">
 
         </div>
@@ -15,14 +15,14 @@
 
         </div>
         <div>
-            <div class="respuestas">
-                <input type="radio" class="inputs"><p class="respuestas"></p>
+            <div>
+                <input type="radio" class="inputs" name="respuesta"><p class="respuestas"></p>
             </div>
-            <div class="respuestas">
-                <input type="radio" class="inputs"><p class="respuestas"></p>
+            <div>
+                <input type="radio" class="inputs" name="respuesta"><p class="respuestas"></p>
             </div>
-            <div class="respuestas">
-                <input type="radio" class="inputs"><p class="respuestas"></p>
+            <div>
+                <input type="radio" class="inputs" name="respuesta"><p class="respuestas"></p>
             </div>
         </div>
         <div>

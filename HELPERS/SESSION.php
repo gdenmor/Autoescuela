@@ -8,12 +8,10 @@
             return $usuario;
         }
     
-        /*function Cerrar_Sesion() {
-            if (isset($_SESSION['user'])){
-                session_destroy();
-                header("Location: http://localhost/PHP/index.php");
-            }
-        }*/
+        public static function Cerrar_Sesion() {
+            session_destroy();
+            header("Location: http://localhost/AUTOESCUELA/index.php");
+        }
     
         public static function iniciaSesion($clave,$valor,$redireccion){
             SESSION::CreaSesion();

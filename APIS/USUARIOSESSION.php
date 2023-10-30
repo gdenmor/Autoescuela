@@ -2,18 +2,25 @@
     require_once "../HELPERS/AUTOLOAD.php";
     AutoLoad();
 
-    SESSION::CreaSesion();
-
-    if ($_SERVER["REQUEST_METHOD"]=="GET"){
-        $id=$_GET["id"];
-
-        $usuario=USER_REPOSITORY::FindBy($id);
-
-        var_dump($usuario);
-
+    require_once "../HELPERS/AUTOLOAD.php";
+    AutoLoad();
     
-
-        echo json_encode($usuario);
+    if ($_SERVER['REQUEST_METHOD'] == "GET") {
+        $id = $_GET['id'];
+        $user = USER_REPOSITORY::FindBy($id);
+    
+        if ($user === false) {
+            echo json_encode(array("success" => false));
+        } else {
+            $userData = array(
+                "id" => $user->getId(),
+                "username" => $user->getUsername(),
+                "password" => $user->getPassword(),
+                "rol" => $user->getRol()
+            );
+    
+            echo json_encode($userData);
+        }
     }
 
 
