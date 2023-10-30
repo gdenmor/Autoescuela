@@ -1,8 +1,8 @@
 <?php
-    require_once "INTERFACE.php";
-    require_once "ENTITYS/USER.php";
-    require_once "CONEXION.php";
-    class USER_REPOSITORY implements BaseDeDatos{
+    require_once $_SERVER['DOCUMENT_ROOT']."/AUTOESCUELA/HELPERS/AUTOLOAD.php";
+    AutoLoad();
+
+    class USER_REPOSITORY{
         public static function FindByUsuario($usuario,$contraseña){
             $conexion=CONEXION::AbreConexion();
             $resultado=$conexion->query("SELECT * from USUARIO where nombre= '$usuario' and contraseña= '$contraseña'");
@@ -85,38 +85,27 @@
             $resultado=$conexion->exec("INSERT INTO USUARIO (nombre, contraseña, rol) values (upper('$usuario'),upper('$password'),upper('$rol'))");
         }
 
-        public static function FindBy($id){
-            $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from USUARIO where id=$id");
-
-            $id=null;
-
-            $array=null;
-
-            $i=0;
-
-            $usuario=null;
-            $contraseña=null;
-            $rol=null;
-            $User=null;
-
-
-            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
-                $id=$tuplas->id;
-                $usuario=$tuplas->nombre;
-                $contrasenia=$tuplas->contraseña;
-                $rol=$tuplas->rol;
-                $User=new USER($id,$usuario,$contraseña,$rol);
-                $i++;
+        public static function FindBy($id) {
+            $conexion = CONEXION::AbreConexion();
+            $resultado = $conexion->query("SELECT * FROM USUARIO WHERE id='$id'");
+        
+            $User = null;
+        
+            if ($resultado) {
+                $tupla = $resultado->fetch(PDO::FETCH_OBJ);
+        
+                if ($tupla) {
+                    $id = $tupla->id;
+                    $usuario = $tupla->nombre;
+                    $contrasenia = $tupla->contraseña;
+                    $rol = $tupla->rol;
+                    $User = new USER($id, $usuario, $contrasenia, $rol);
+                }else{
+                    return false;
+                }
             }
-
-            
-
+        
             return $User;
         }
     }
-
-
-
-
 ?>

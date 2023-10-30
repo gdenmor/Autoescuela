@@ -20,5 +20,13 @@ window.addEventListener("load",function(){
     elementosdesplegables.style.display="none";
     elementosdesplegablesrepetir.style.display="none";
 
+    var login=this.document.getElementById("click",function(){
+        fetch("http://localhost/AUTOESCUELA/APIS/USUARIOSESSION.php")
+            .then(x=>x.json())
+            .then(y=>{
+                alert(y.nombre);
+            })
+    })
+
 
 })

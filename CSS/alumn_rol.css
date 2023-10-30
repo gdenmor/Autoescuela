@@ -1,32 +1,37 @@
 body{
-    background-color: #83C2CF;
+    background-image: url("../IMAGES/pngtree-driving-school-car-school-funny-photo-image_14386606.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 nav{
     display: flex;
-    align-items: center;
+    flex-direction: row;
 }
 
 .elementos{
     margin-right: 20%;
     display: flex;
     align-items: center;
+    width: 8.7%;
 }
 
 .elementos img{
     width: 100%;
+    height: 100%;
 }
 
 #menu{
     background-color: #D0B97D;
 }
 
-.elementos #logo{
-    width: 60%;
-}
+/*.elementos #logo{
+    width: 15%;
+}*/
 
 .boton {
     background-color: #333;
     color: #fff;
+    width: 100%;
 }
 
 .elementos_desplegable{
@@ -60,4 +65,10 @@ table tbody tr td{
 
 table thead tr td{
     text-align: center;
+}
+
+#login img{
+    width: 52%;
+    background-size: cover;
+    height: 100%;
 }

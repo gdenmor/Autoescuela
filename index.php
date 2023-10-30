@@ -1,8 +1,7 @@
 
-            <?php
-            require_once "REPOSITORYS/USER_REPOSITORY.php";
-            require_once "ENTITYS/USER.php";
-            require_once "HELPERS/SESSION.php";
+<?php
+            require_once "HELPERS/AUTOLOAD.php";
+            AutoLoad();
 
             $mensajeError = "";
 
@@ -32,9 +31,9 @@
                         if ($existe) {
                             if ($User->getRol() !== "") {
                                 if ($User->getRol() == "ALUMNO") {
-                                    iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/HTML/ALUMN_ROL.php");
+                                    SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/HTML/ALUMN_ROL.php");
                                 } else if ($User->getRol() == "PROFESOR") {
-                                    iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/HTML/TEACHER_ROL.php");
+                                    SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/HTML/TEACHER_ROL.php");
                                 }
                             } else if ($User->getRol()==null){
                                 $mensajeError = "El usuario está a la espera de ser aprobado";

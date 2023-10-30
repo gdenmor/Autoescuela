@@ -1,3 +1,6 @@
+<?php
+    require_once "../HELPERS/AUTOLOAD.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +18,7 @@
                     <img src="../IMAGES/LOGO.png">
                 </div>
                 <div class="elementos">
-                    <button class="boton">GENERAR EXÁMENES</button>
+                    <a><button class="boton">GENERAR EXÁMENES</button></a>
                     <div class="elementos_desplegable">
                         <div class="elementos">
                             <a><b>INICIAL</b></a>
@@ -29,7 +32,7 @@
                     </div>
                 </div>
                 <div class="elementos">
-                    <button class="boton">REPETIR</button>
+                    <a><button class="boton">REPETIR</button></a>
                         <div class="elementos_desplegable">
                             <div class="elementos">
                                 <a><b>EXAMEN 1</b></a>
@@ -41,6 +44,9 @@
                                 <a><b>EXAMEN 3</b></a>
                             </div>
                         </div>
+                </div>
+                <div id="login">
+                    <img src="../IMAGES/Captura de pantalla 2023-10-29 114459.png">
                 </div>
             </nav>
         </div>
