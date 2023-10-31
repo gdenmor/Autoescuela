@@ -1,8 +1,10 @@
 <?php
-    require_once "../HELPERS/AUTOLOAD.php";
-    AutoLoad();
+    AUTOLOAD::AutoLoad();
     SESSION::CreaSesion();
     $User = SESSION::leer_session("USER");
+    if ($User==null){
+        SESSION::Cerrar_Sesion();
+    }
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
         $logout=$_POST['Cerrar_sesion'];
         if ($logout){
@@ -17,8 +19,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../CSS/alumn_rol.css">
-    <script src="../JS/ROL_ALUMN.js"></script>
+    <link rel="stylesheet" href="CSS/alumn_rol.css">
+    <script src="JS/ROL_ALUMN.js"></script>
 </head>
 
 <body>
@@ -26,7 +28,7 @@
         <div id="menu">
             <nav>
                 <div class="elementos" id="logo">
-                    <img src="../IMAGES/LOGO.png">
+                    <img src="IMAGES/LOGO.png">
                 </div>
                 <div class="elementos">
                     <a><button class="boton">GENERAR EXÁMENES</button></a>
@@ -58,7 +60,7 @@
                 </div>
 
                 <div id="login">
-                    <img src="../IMAGES/Captura de pantalla 2023-10-29 114459.png">
+                    <img src="IMAGES/Captura de pantalla 2023-10-29 114459.png">
                 </div>
             </nav>
         </div>

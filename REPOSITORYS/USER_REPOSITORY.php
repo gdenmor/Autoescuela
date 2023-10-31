@@ -1,6 +1,6 @@
 <?php
     require_once $_SERVER['DOCUMENT_ROOT']."/AUTOESCUELA/HELPERS/AUTOLOAD.php";
-    AutoLoad();
+    AUTOLOAD::AutoLoad();
 
     class USER_REPOSITORY{
         public static function FindByUsuario($usuario,$contraseña){

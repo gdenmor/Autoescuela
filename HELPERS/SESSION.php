@@ -1,16 +1,16 @@
 <?php
     require_once "AUTOLOAD.php";
-    AutoLoad();
+    AUTOLOAD::AutoLoad();
     class SESSION{
 
         public static function leer_session($clave) {
-            $usuario=$_SESSION[$clave];
-            return $usuario;
+            $valor=$_SESSION[$clave];
+            return $valor;
         }
     
         public static function Cerrar_Sesion() {
             session_destroy();
-            header("Location: http://localhost/AUTOESCUELA/index.php");
+            header("Location: http://localhost/AUTOESCUELA/index.php?menu=inicio");
         }
     
         public static function iniciaSesion($clave,$valor,$redireccion){

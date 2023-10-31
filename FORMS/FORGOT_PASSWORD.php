@@ -1,6 +1,5 @@
 <?php
-require_once "../HELPERS/AUTOLOAD.php";
-AutoLoad();
+AUTOLOAD::AutoLoad();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = isset($_POST['user']) ? strtoupper(str_replace(" ", "", $_POST['user'])) : "";
     $password = isset($_POST['password']) ? strtoupper(str_replace(" ", "", $_POST['password'])) : "";
@@ -27,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $user->setUsername($usuario);
                         $id = $user->getId();
                         USER_REPOSITORY::UpdateById($id, $user);
-                        header("Location: http://localhost/AUTOESCUELA/index.php");
+                        header("Location: http://localhost/AUTOESCUELA/index.php?menu=inicio");
                     } else {
                         $mensajeError = "Debe de tener entre 1 y 45 caracteres tanto el usuario como la contraseña";
                     }
@@ -54,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contraseña olvidada</title>
-    <link rel="stylesheet" href="../CSS/forgot_password.css">
+    <link rel="stylesheet" href="CSS/forgot_password.css">
 </head>
 
 <body id="cuerpo">

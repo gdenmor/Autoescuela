@@ -1,9 +1,6 @@
 <?php
     require_once "../HELPERS/AUTOLOAD.php";
-    AutoLoad();
-
-    require_once "../HELPERS/AUTOLOAD.php";
-    AutoLoad();
+    AUTOLOAD::AutoLoad();
     
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $id = $_GET['id'];
