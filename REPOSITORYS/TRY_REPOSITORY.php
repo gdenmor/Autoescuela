@@ -81,5 +81,28 @@
         
             return $User;
         }
+
+        public static function PreguntasdeUnExamen($id) {
+            $conexion = CONEXION::AbreConexion();
+            $resultado = $conexion->query("SELECT * FROM INTENTO WHERE idExamen='$id'");
+        
+            $User = null;
+            $array=null;
+
+            $i=0;
+        
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                $idIntento=$tuplas->idIntento;
+                $idUser=$tuplas->id;
+                $User=USER_REPOSITORY::FindBy($idUser);
+                $JSONRespuestas=$tuplas->JSONRespuestas;
+                $fechaRealizado=$tuplas->fecha;
+                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas);
+                $array[$i]=$Intento;
+                $i++;
+            }
+        
+            return $array;
+        }
     }
 ?>
