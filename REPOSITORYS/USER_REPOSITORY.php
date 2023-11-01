@@ -1,5 +1,4 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT']."/AUTOESCUELA/HELPERS/AUTOLOAD.php";
     AUTOLOAD::AutoLoad();
 
     class USER_REPOSITORY{
@@ -64,7 +63,7 @@
         public static function DeleteById($id){
             $conexion=CONEXION::AbreConexion();
 
-            $resultado=$conexion->exec("DELETE from producto where id=$id");
+            $resultado=$conexion->exec("DELETE from USUARIO where id=$id");
 
         }
         public static function UpdateById($id,$objetoActualizado){

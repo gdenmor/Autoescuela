@@ -3,6 +3,7 @@ window.addEventListener("load",function(){
     var container=this.document.getElementById("container");
     var anterior=this.document.getElementById("anterior");
     var siguiente=this.document.getElementById("siguiente");
+    var j=0;
     
     
     this.fetch("../examenprueba.json")
@@ -10,25 +11,21 @@ window.addEventListener("load",function(){
         .then(y=>{
             var preguntas = y.Examen.preguntas;
 
-            var j=0;
-
             mostrarPregunta(divpreguntas, preguntas,container);
+
 
             
             siguiente.addEventListener("click", function () {
-                divpreguntas[j].classList.add("OCULTA");
 
                 j++;
                 if (j >= preguntas.length) {
                     j = 0;
                 }
-
-                divpreguntas[j].classList.remove("OCULTA");
-
-                
             });
 
             anterior.addEventListener("click", function () {
+                divpreguntas[j].classList.add("OCULTA");
+                divpreguntas[j].classList.remove("MUESTRA");
                 j--;
                 alert(j);
                 if (j < 0) {
@@ -36,7 +33,7 @@ window.addEventListener("load",function(){
                 }
 
                 divpreguntas[j].classList.remove("OCULTA");
-                
+                divpreguntas[j].classList.add("MUESTRA");
             });
 
 
@@ -108,6 +105,7 @@ window.addEventListener("load",function(){
                 divrespuestas.appendChild(rep1);
                 divrespuestas.appendChild(rep2);
                 divrespuestas.appendChild(rep3);
+
         
                 divpregunta.appendChild(divfoto);
                 divpregunta.appendChild(dudosa);
@@ -115,10 +113,15 @@ window.addEventListener("load",function(){
                 divpregunta.appendChild(divrespuestas);
         
                 contenedor.appendChild(divpregunta);
+
         
-                if (i !== 0) {
+                if (i!=0){
                     divpregunta.classList.add("OCULTA");
+                }else{
+                    divpregunta.classList.add("MUESTRA");
                 }
+                
+
             }
                     
             

@@ -29,11 +29,18 @@
         }
 
         public function setJsonFileRespuestas($jsonRespuestas){
-            $this->JSONrespuestas = json_encode($jsonRespuestas);
+            $this->JSONrespuestas = json_decode($jsonRespuestas);
         }
 
         public function getJsonFileRespuestas(){
             return $this->JSONrespuestas;
+        }
+        public function setfecha($fecha){
+            $this->fecha = $fecha;
+        }
+
+        public function getfecha(){
+            return $this->fecha;
         }
     }
 
