@@ -15,10 +15,6 @@
             $idUser=0;
 
 
-            $usuario=null;
-            $contrasena=null;
-            $rol=null;
-
 
             while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
                 $idIntento=$tuplas->idIntento;
@@ -26,7 +22,9 @@
                 $User=USER_REPOSITORY::FindBy($idUser);
                 $JSONRespuestas=$tuplas->JSONRespuestas;
                 $fechaRealizado=$tuplas->fecha;
-                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas);
+                $idExamen=$tuplas->idExamen;
+                $Examen=$idExamen;//FALTA OBTENER EL EXAMEN
+                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$Examen);
                 $array[$i]=$Intento;
                 $i++;
             }
@@ -35,10 +33,10 @@
 
             return $array;
         }
-        public static function DeleteById($id){
+        public static function DeleteById($idIntento){
             $conexion=CONEXION::AbreConexion();
 
-            $resultado=$conexion->exec("DELETE from INTENTO where id=$id");
+            $resultado=$conexion->exec("DELETE from INTENTO where idIntento=$idIntento");
 
         }
         public static function UpdateById($id,$objetoActualizado){
@@ -46,8 +44,9 @@
             $idUser=$objetoActualizado->getUser()->getId();
             $fechaRealizado=$objetoActualizado->getfecha();
             $JSONRespuestas=$objetoActualizado->getJsonFileRespuestas();
+            $idExamen=$objetoActualizado->getExamen()->getId();
 
-            $resultado=$conexion->exec("UPDATE INTENTO set id=upper('$idUser'), fecha='$fechaRealizado', JSONRespuestas='upper($JSONRespuestas') where idIntento'$id'");
+            $resultado=$conexion->exec("UPDATE INTENTO set id=upper('$idUser'), fecha='$fechaRealizado', JSONRespuestas='upper($JSONRespuestas'), idExamen='$idExamen' where idIntento= '$id'");
         }
 
         public static function Insert($objeto){
@@ -56,13 +55,14 @@
             $idUser=$objeto->getUser()->getId();
             $fechaRealizado=$objeto->getfecha();
             $JSONRespuestas=json_encode($objeto->getJsonFileRespuestas());
+            $idExamen=$objeto->getExamen()->getId();
 
-            $resultado=$conexion->exec("INSERT INTO INTENTO (id, fecha, JSONRespuestas) values (upper('$idUser'),upper('$fechaRealizado'),upper('$JSONRespuestas'))");
+            $resultado=$conexion->exec("INSERT INTO INTENTO (id, fecha, JSONRespuestas,idExamen) values (upper('$idUser'),upper('$fechaRealizado'),upper('$JSONRespuestas'),'$idExamen')");
         }
 
-        public static function FindBy($id) {
+        public static function FindBy($idIntento) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM USUARIO WHERE id='$id'");
+            $resultado = $conexion->query("SELECT * FROM INTENTO WHERE idIntento='$idIntento'");
         
             $User = null;
         
@@ -75,16 +75,18 @@
                     $User=USER_REPOSITORY::FindBy($idUser);
                     $JSONRespuestas=$tupla->JSONRespuestas;
                     $fechaRealizado=$tupla->fecha;
-                    $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas);
+                    $idExamen=$tupla->idExamen;
+                    $Examen=$idExamen;//QUEDA OBTENER UN EXAMEN
+                    $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$Examen);
                 }
             }
         
             return $User;
         }
 
-        public static function PreguntasdeUnExamen($id) {
+        public static function PreguntasdeUnExamen($idExamen) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM INTENTO WHERE idExamen='$id'");
+            $resultado = $conexion->query("SELECT * FROM INTENTO WHERE idExamen='$idExamen'");
         
             $User = null;
             $array=null;
@@ -97,7 +99,8 @@
                 $User=USER_REPOSITORY::FindBy($idUser);
                 $JSONRespuestas=$tuplas->JSONRespuestas;
                 $fechaRealizado=$tuplas->fecha;
-                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas);
+                $Examen=$idExamen;//QUEDA OBTENER EL EXAMEN
+                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$Examen);
                 $array[$i]=$Intento;
                 $i++;
             }

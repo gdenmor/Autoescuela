@@ -4,12 +4,22 @@
         private $User;
         private $fecha;
         private $JSONrespuestas;
+        private $Examen;
 
-        public function __construct($idTry, $User, $fecha,$JSONrespuestas){
+        public function __construct($idTry, $User, $fecha,$JSONrespuestas,$Examen){
             $this->idTry = $idTry;
             $this->User = $User;
             $this->fecha = $fecha;
             $this->JSONrespuestas = json_decode($JSONrespuestas);
+            $this->Examen = $Examen;
+        }
+
+        public function getExamen(){
+            return $this->Examen;
+        }
+
+        public function setExamen($Examen){
+            $this->Examen = $Examen;
         }
 
         public function getIdTry(){
