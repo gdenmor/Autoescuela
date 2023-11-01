@@ -4,9 +4,9 @@
     class TRY_REPOSITORY{
         public static function FindAll(){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from CATEGORIA");
+            $resultado=$conexion->query("SELECT * from DIFICULTAD");
 
-            $idCategoria=null;
+            $idDificultad=null;
 
             $array=null;
 
@@ -16,9 +16,9 @@
 
 
             while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
-                $idCategoria=$tuplas->idCategoria;
+                $idDificultad=$tuplas->idDificultad;
                 $nombre=$tuplas->nombre;
-                $Categoria=new CATEGORIA($idCategoria,$nombre);
+                $Categoria=new DIFICULTAD($idDificultad,$nombre);
                 $array[$i]=$Categoria;
                 $i++;
             }
@@ -27,18 +27,17 @@
 
             return $array;
         }
-        public static function DeleteById($idCategoria){
+        public static function DeleteById($idDificultad){
             $conexion=CONEXION::AbreConexion();
 
-            $resultado=$conexion->exec("DELETE from CATEGORIA where idCategoria=$idCategoria");
+            $resultado=$conexion->exec("DELETE from DIFICULTAD where idDificultad=$idDificultad");
 
         }
-        public static function UpdateById($idCategoria,$objetoActualizado){
+        public static function UpdateById($idDificultad,$objetoActualizado){
             $conexion=CONEXION::AbreConexion();
-            $idCategoria=$objetoActualizado->getId();
             $nombre=$objetoActualizado->getNombre();
 
-            $resultado=$conexion->exec("UPDATE CATEGORIA set nombre=upper('$nombre') where idCategoria='$idCategoria'");
+            $resultado=$conexion->exec("UPDATE DIFICULTAD set nombre=upper('$nombre') where idDificultad='$idDificultad'");
         }
 
         public static function Insert($objeto){
@@ -46,12 +45,12 @@
 
             $nombre=$objeto->getNombre();
 
-            $resultado=$conexion->exec("INSERT INTO CATEGORIA (nombre) values (upper('$nombre'))");
+            $resultado=$conexion->exec("INSERT INTO DIFICULTAD (nombre) values (upper('$nombre'))");
         }
 
-        public static function FindBy($idCategoria) {
+        public static function FindBy($idDificultad) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM CATEGORIA WHERE id='$idCategoria'");
+            $resultado = $conexion->query("SELECT * FROM DIFICULTAD WHERE idDificultad='$idDificultad'");
         
             $Categoria = null;
         
@@ -59,9 +58,9 @@
                 $tupla = $resultado->fetch(PDO::FETCH_OBJ);
         
                 if ($tupla) {
-                    $idCategoria=$tupla->idCategoria;
+                    $idCategoria=$tupla->idDificultad;
                     $nombre=$tupla->nombre;
-                    $Categoria=new CATEGORIA($idCategoria,$nombre);
+                    $Categoria=new DIFICULTAD($idCategoria,$nombre);
                 }
             }
         
