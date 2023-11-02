@@ -15,7 +15,7 @@
                 $fechahora=$tuplas->fechahora;
                 $Intentos=TRY_REPOSITORY::IntentosdeUnExamen($idExamen);
                 $Preguntas=PREGUNTA_REPOSITORY::PreguntasdeUnExamen($idExamen);
-                //FALTA SACAR EL ARRAY DE USUARIO
+                $Usuarios=TEST_REPOSITORY::UsuariosEXAMEN($idExamen);
                 $Examen=new TEST($idExamen,$fechahora,$Intentos,"",$Preguntas);
                 $array[]=$Examen;
                 $i++;
@@ -61,13 +61,41 @@
                     $fechahora=$tuplas->fechahora;
                     $Intentos=TRY_REPOSITORY::IntentosdeUnExamen($idExamen);
                     $Preguntas=PREGUNTA_REPOSITORY::PreguntasdeUnExamen($idExamen);
-                    //FALTA SACAR EL ARRAY DE USUARIO
-                    $Examen=new TEST($idExamen,$fechahora,$Intentos,"",$Preguntas);
+                    $Usuarios=TEST_REPOSITORY::UsuariosEXAMEN($idExamen);
+                    $Examen=new TEST($idExamen,$fechahora,$Intentos,$Usuarios,$Preguntas);
                     
                 }
             }
         
             return $Examen;
+        }
+
+        public static function UsuariosEXAMEN($idExamen){
+            $conexion=CONEXION::AbreConexion();
+            $resultado=$conexion->query("SELECT U.*
+                                        FROM USUARIO U
+                                        JOIN INTENTO I ON U.id = I.id
+                                        JOIN EXAMEN E ON I.idExamen = E.idExamen
+                                        where E.idExamen=$idExamen;
+                                        ");
+
+            $i=0;
+            $array=null;
+
+
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                $id=$tuplas->id;
+                $usuario=$tuplas->nombre;
+                $contrasena=$tuplas->contraseña;
+                $rol=$tuplas->rol;
+                $User=new USER($id,$usuario,$contrasena,$rol);
+                $array[$i]=$User;
+                $i++;
+            }
+
+            
+
+            return $array;
         }
     }
 ?>
