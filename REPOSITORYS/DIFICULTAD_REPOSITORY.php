@@ -1,7 +1,7 @@
 <?php
     AUTOLOAD::AutoLoad();
 
-    class TRY_REPOSITORY{
+    class DIFICULTAD_REPOSITORY{
         public static function FindAll(){
             $conexion=CONEXION::AbreConexion();
             $resultado=$conexion->query("SELECT * from DIFICULTAD");

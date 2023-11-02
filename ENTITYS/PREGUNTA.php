@@ -49,6 +49,59 @@
         public function getTipo(){
             return $this->tipo;
         }
+
+        public function setId($id){
+            $this->id = $id;
+        }
+
+        public function setCategoria($Categoria){
+            $this->Categoria = $Categoria;
+        }
+
+        public function setDificultad($Dificultad){
+            $this->Dificultad = $Dificultad;
+        }
+
+        public function setEnunciado($Enunciado){
+            $this->Enunciado = $Enunciado;
+        }
+
+        public function setr1($rep1){
+            $this->rep1 = $rep1;
+        }
+
+        public function setrep2($rep2){
+            $this->rep2 = $rep2;
+        }
+
+        public function setrep3($rep3){
+            $this->rep3 = $rep3;
+        }
+
+        public function setcorrecta($correcta){
+            $this->correcta = $correcta;
+        }
+
+        public function setUrl($url){
+            $this->url = $url;
+        }
+
+        public function setTipo($tipo){
+            $this->tipo = $tipo;
+        }
+
+        public function __construct($id,$Categoria,$Dificultad,$Enunciado,$rep1,$rep2,$rep3,$correcta,$url,$tipo) {
+            $this->id = $id;
+            $this->Categoria = $Categoria;
+            $this->Dificultad = $Dificultad;
+            $this->Enunciado = $Enunciado;
+            $this->rep1 = $rep1;
+            $this->rep2 = $rep2;
+            $this->rep3 = $rep3;
+            $this->correcta = $correcta;
+            $this->url = $url;
+            $this->tipo = $tipo;
+        }
     }
 
 

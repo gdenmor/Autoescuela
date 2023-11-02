@@ -1,5 +1,4 @@
 <?php
-    require_once "HELPERS/AUTOLOAD.php";
     AUTOLOAD::AutoLoad();
 
             $mensajeError = "";
