@@ -60,6 +60,7 @@
 
             return $array;
         }
+
         public static function DeleteById($id){
             $conexion=CONEXION::AbreConexion();
 

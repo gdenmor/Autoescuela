@@ -14,6 +14,11 @@ if (isset($_GET['menu'])) {
         require_once '../Autoescuela/FORMS/ALUMN_ROL.php';
      
     }
+
+    if ($_GET['menu'] == "admin") {
+        require_once '../Autoescuela/FORMS/ADMIN_ROL.php';
+     
+    }
 }
 
     

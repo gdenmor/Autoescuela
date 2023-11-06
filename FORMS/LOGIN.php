@@ -3,6 +3,7 @@
 
             $mensajeError = "";
 
+
             $login = isset($_POST['login']) ? $_POST['login'] : "";
             $registro = isset($_POST['registro']) ? $_POST['registro'] : "";
             $usuario = isset($_POST['usuario']) ? strtoupper(str_replace(" ","",$_POST['usuario'])) : "";
@@ -32,6 +33,8 @@
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=alumno");
                                 } else if ($User->getRol() == "PROFESOR") {
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=profesor");
+                                }else if ($User->getRol() == "ADMINISTRADOR") {
+                                    SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=admin");
                                 }
                             } else if ($User->getRol()==null){
                                 $mensajeError = "El usuario está a la espera de ser aprobado";
@@ -97,46 +100,49 @@
 
 <body id="cuerpo">
     <div id="contenedor">
-        <div id="imagen">
-            <img src="IMAGES/LOGO.png">
-        </div>
+        <main>
+            <section id="imagen">
+                <img src="IMAGES/LOGO.png">
+            </section>
         <form method="post">
-            <div id="usuario">
-                <div id="lblUsuario">
+            <section id="usuario">
+                <article id="lblUsuario">
                     <label><b> Usuario: </b></label>
-                </div>
-                <div id="contrasenia">
+                </article>
+                <article id="contrasenia">
                     <input type="text" name="usuario" size="45">
-                </div>
-            </div>
-            <div id="contraseña">
-                <div id="lblContrasena">
+                </article>
+            </section>
+            <section id="contraseña">
+                <article id="lblContrasena">
                     <label><b> Contraseña: </b></label>
-                </div>
-                <div>
+                </article>
+                <article>
                     <input type="password" name="password" size="45">
-                </div>
-            </div>
-            <div id="divbotones">
-                <div class="botones">
+                </article>
+            </section>
+            <section id="divbotones">
+                <article class="botones">
                     <input type="submit" value="REGISTRARSE" name="registro">
-                </div>
-                <div class="botones">
+                </article>
+                <article class="botones">
                     <input type="submit" value="INICIAR SESIÓN" name="login">
-                </div>
-            </div>
-            <div id="forgot_password">
+                </article>
+            </section>
+            <section id="forgot_password">
                 <a id="link" href="http://localhost/AUTOESCUELA/index.php?menu=olvida_contraseña">¿Has olvidado tu contraseña?</a>
-            </div>
+            </section>
 
-            <div id="diverror">
+            <section id="diverror">
                 <?php
                 if ($mensajeError != "") {
                     echo $mensajeError;
                 }
             ?>
-            </div>
+            </section>
         </form>
+        </main>
+        
     </div>
 </body>
 

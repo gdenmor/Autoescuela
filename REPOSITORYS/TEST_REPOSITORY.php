@@ -16,7 +16,7 @@
                 $Intentos=TRY_REPOSITORY::IntentosdeUnExamen($idExamen);
                 $Preguntas=PREGUNTA_REPOSITORY::PreguntasdeUnExamen($idExamen);
                 $Usuarios=TEST_REPOSITORY::UsuariosEXAMEN($idExamen);
-                $Examen=new TEST($idExamen,$fechahora,$Intentos,"",$Preguntas);
+                $Examen=new TEST($idExamen,$fechahora,$Intentos,$Usuarios,$Preguntas);
                 $array[]=$Examen;
                 $i++;
             }
@@ -76,7 +76,7 @@
                                         FROM USUARIO U
                                         JOIN INTENTO I ON U.id = I.id
                                         JOIN EXAMEN E ON I.idExamen = E.idExamen
-                                        where E.idExamen=$idExamen;
+                                        where E.idExamen='$idExamen'
                                         ");
 
             $i=0;

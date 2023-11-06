@@ -14,7 +14,7 @@
             $this->Preguntas = $Preguntas;
         }
 
-        public function getId(){
+        public function getIds(){
             return $this->id;
         }
 

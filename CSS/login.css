@@ -9,13 +9,14 @@
 }
 
 #imagen{
-    width: 50%;
+    width: 100%;
     margin-left: 8%;
     margin-bottom: 3%;
     justify-content: center;
 }
 #imagen img{
-    width: 90%;
+    margin-left: 2%;
+    width: 100%;
 }
 
 #contenedor{

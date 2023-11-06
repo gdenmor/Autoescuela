@@ -43,7 +43,7 @@
         public static function Insert($objeto){
             $conexion=CONEXION::AbreConexion();
 
-            $nombre=$objeto->getNombre();
+            $nombre=$objeto->getNom();
 
             $resultado=$conexion->exec("INSERT INTO DIFICULTAD (nombre) values (upper('$nombre'))");
         }

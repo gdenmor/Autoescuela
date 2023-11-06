@@ -31,21 +31,10 @@
                     <img src="IMAGES/LOGO.png">
                 </div>
                 <div class="elementos">
-                    <a><button class="boton">GENERAR EXÁMENES</button></a>
-                    <div class="elementos_desplegable">
-                        <div class="elementos">
-                            <a><b>INICIAL</b></a>
-                        </div>
-                        <div class="elementos">
-                            <a><b>MEDIO</b></a>
-                        </div>
-                        <div class="elementos">
-                            <a><b>DIFÍCIL</b></a>
-                        </div>
-                    </div>
+                    <a><input type="button" class="boton" value="GENERAR EXAMENES"></input></a>
                 </div>
                 <div class="elementos">
-                    <a><button class="boton">REPETIR</button></a>
+                    <a><input type="button" class="boton" value="REPETIR EXAMEN"></input></a>
                     <div class="elementos_desplegable">
                         <div class="elementos">
                             <a><b>EXAMEN 1</b></a>
@@ -76,12 +65,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>GABRIEL</td>
-                        <td>7/10</td>
-                        <td>1</td>
-                        <td><input type="button" value="VISUALIZAR"></td>
-                    </tr>
 
                 </tbody>
             </table>

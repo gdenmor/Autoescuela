@@ -11,12 +11,9 @@
 
 <body>
     <div id="container">
-        
 
-    </div>
-    <div>
-        <button id="anterior">ANTERIOR</button>
-        <button id="siguiente">SIGUIENTE</button>
+
+
     </div>
 </body>
 
