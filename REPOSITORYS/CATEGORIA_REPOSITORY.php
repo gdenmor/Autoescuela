@@ -51,7 +51,7 @@
 
         public static function FindBy($idCategoria) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM CATEGORIA WHERE id='$idCategoria'");
+            $resultado = $conexion->query("SELECT * FROM CATEGORIA WHERE idCategoria=$idCategoria");
         
             $Categoria = null;
         

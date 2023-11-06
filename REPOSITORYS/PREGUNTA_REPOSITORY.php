@@ -70,7 +70,7 @@
             $url=$objeto->getUrl();
             $tipo=$objeto->getTipo();
 
-            $resultado=$conexion->exec("INSERT INTO INTENTO (idcategoria, iddificultad, enunciado ,rep1,rep2,rep3,correcta,url,tipo) values ('$idCategoria','$idDificultad',upper('$enunciado'),upper('$rep1'),upper('$rep2'),upper('$rep3'),upper('$correcta'),upper('$url'),upper('$tipo'))");
+            $resultado=$conexion->exec("INSERT INTO PREGUNTA (idcategoria, iddificultad, enunciado ,rep1,rep2,rep3,correcta,url,tipo) values ('$idCategoria','$idDificultad',upper('$enunciado'),upper('$rep1'),upper('$rep2'),upper('$rep3'),upper('$correcta'),upper('$url'),upper('$tipo'))");
         }
 
         public static function FindBy($idPregunta) {
@@ -86,7 +86,7 @@
                     $idPregunta=$tuplas->idPregunta;
                     $idCategoria=$tuplas->idcategoria;
                     $Categoria=CATEGORIA_REPOSITORY::FindBy($idCategoria);
-                    $idDificultad=$tuplas->idDificultad;
+                    $idDificultad=$tuplas->iddificultad;
                     $Dificultad=DIFICULTAD_REPOSITORY::FindBy($idDificultad);
                     $enunciado=$tuplas->enunciado;
                     $rep1=$tuplas->rep1;
