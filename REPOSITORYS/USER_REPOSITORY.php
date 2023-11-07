@@ -73,18 +73,18 @@
         }
         public static function UpdateById($id,$objetoActualizado){
             $conexion=CONEXION::AbreConexion();
-            $usuario=$objetoActualizado->getUsername();
-            $password=$objetoActualizado->getPassword();
-            $rol=$objetoActualizado->getRol();
+            $usuario=$objetoActualizado->username;
+            $password=$objetoActualizado->password;
+            $rol=$objetoActualizado->rol;
 
             $resultado=$conexion->exec("UPDATE USUARIO set nombre='$usuario', contraseña='$password', rol='$rol' where id='$id'");
         }
         public static function Insert($objeto){
             $conexion=CONEXION::AbreConexion();
 
-            $usuario=$objeto->getUsername();
-            $password=$objeto->getPassword();
-            $rol=$objeto->getRol();
+            $usuario=$objeto->username;
+            $password=$objeto->password;
+            $rol=$objeto->rol;
 
             $resultado=$conexion->exec("INSERT INTO USUARIO (nombre, contraseña, rol) values (upper('$usuario'),upper('$password'),upper('$rol'))");
         }
@@ -112,6 +112,40 @@
             }
         
             return $User;
+        }
+
+        public static function FindRolNull(){
+            $conexion=CONEXION::AbreConexion();
+            $resultado=$conexion->prepare("SELECT * from USUARIO where rol is null");
+            $resultado->execute();
+
+            $id=null;
+
+            $array=null;
+
+            $i=0;
+
+            $usuario=null;
+            $rol=null;
+            $User=null;
+            $contrasenia=null;
+
+            $Users=[];
+
+
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                $id=$tuplas->id;
+                $usuario=$tuplas->nombre;
+                $contrasenia=$tuplas->contraseña;
+                $rol=$tuplas->rol;
+                $User=new USER($id,$usuario,$contrasenia,$rol);
+                $Users[]=$User;
+                $i++;
+            }
+
+            
+
+            return $Users;
         }
     }
 ?>

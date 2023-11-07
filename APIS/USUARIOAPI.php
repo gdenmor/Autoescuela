@@ -19,9 +19,14 @@
         $id=$_GET["id"];
         parse_str($cuerpo, $_PUT);
         $_PUT['id'] = $id;
-        //$objeto=file_get_contents("php://input");
-        //$usuario=json_decode($objeto);
-        $user=new User($_PUT['id'],"as","12",null);
+        $usuario=json_decode($cuerpo);
+
+        $user=new stdClass();
+        $user->id=$id;
+        $user->username=$usuario->username;
+        $user->password=$usuario->password;
+        $user->rol=$usuario->rol;
+        var_dump ($usuario);
         USER_REPOSITORY::UpdateById($id,$user);
         echo "Usuario actualizado";
     }
@@ -31,16 +36,18 @@
         $id=$_GET["id"];
         parse_str($id, $_DELETE);
         $_DELETE['id'] = $id;
-        //$objeto=file_get_contents("php://input");
-        //$usuario=json_decode($objeto);
         USER_REPOSITORY::DeleteById($_DELETE['id']);
         echo "Usuario borrado";
     }
     //AÑADE
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        //$objeto=file_get_contents("php://input");
-        $user=new User(1,"hola","12",null);
-        USER_REPOSITORY::Insert($user);
+        $objeto=file_get_contents("php://input");
+        $user=json_decode($objeto);
+        $usuario=new stdClass();
+        $usuario->username=$user->username;
+        $usuario->password=$user->password;
+        $usuario->rol=$user->rol;
+        USER_REPOSITORY::Insert($usuario);
 
     }
 

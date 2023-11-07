@@ -20,7 +20,7 @@
                     if (is_array($Usuarios) &&count($Usuarios)> 0) {
 
                         for ($i = 0; $i < count($Usuarios); $i++) {
-                            if ($Usuarios[$i]->getUsername() == $usuario && $Usuarios[$i]->getPassword() == $password) {
+                            if (strtoupper(str_replace(" ","",$Usuarios[$i]->username)) == $usuario && strtoupper(str_replace(" ","",$Usuarios[$i]->password))) {
                                 $User = $Usuarios[$i];
                                 $existe = true;
                                 $i=999;
@@ -28,15 +28,15 @@
                         }
     
                         if ($existe) {
-                            if ($User->getRol() !== "") {
-                                if ($User->getRol() == "ALUMNO") {
+                            if ($User->rol !== "") {
+                                if ($User->rol == "ALUMNO") {
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=alumno");
-                                } else if ($User->getRol() == "PROFESOR") {
+                                } else if ($User->rol == "PROFESOR") {
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=profesor");
-                                }else if ($User->getRol() == "ADMINISTRADOR") {
+                                }else if ($User->rol == "ADMINISTRADOR") {
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=admin");
                                 }
-                            } else if ($User->getRol()==null){
+                            } else if ($User->rol==null){
                                 $mensajeError = "El usuario está a la espera de ser aprobado";
                             }
                         } else {
@@ -55,7 +55,7 @@
                     if (is_array($Usuarios) && count($Usuarios) > 0) {
                         
                         for ($i = 0; $i < count($Usuarios); $i++) {
-                            if ($Usuarios[$i]->getUsername() == $usuario && $Usuarios[$i]->getPassword() == $password || $Usuarios[$i]->getUsername() == $usuario) {
+                            if (strtoupper(str_replace(" ","",$Usuarios[$i]->username)) == $usuario && strtoupper(str_replace(" ","",$Usuarios[$i]->password))) {
                                 $existe = true;
                             }
                         }

@@ -1,12 +1,6 @@
 <?php
-    require_once "../HELPERS/AUTOLOAD.php";
+    require_once "../AUTOESCUELA/HELPERS/AUTOLOAD.php";
     AUTOLOAD::AutoLoad();
-
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $Usuario=file_get_contents("php://input");
-        echo $Usuario;
-    }
 
 ?>
 
@@ -16,17 +10,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../CSS/admin_rol.css">
-    <script src="../JS/ADMIN.js"></script>
+    <link rel="stylesheet" href="../AUTOESCUELA/CSS/admin_rol.css">
+    <script src="../AUTOESCUELA/JS/ADMIN.js"></script>
 </head>
 <body>
     <div>
         <nav id="navegacion">
             <div>
-                <img src="../IMAGES/LOGO.png">
+                <img src="../AUTOESCUELA/IMAGES/LOGO.png">
             </div>
             <div class="BOTONES">
-                <a><input type="button" value="CREAR USUARIOS"></a>
+                <a href="http://localhost/AUTOESCUELA/index.php?menu=crea"><input type="button" value="CREAR USUARIOS"></a>
             </div>
             <div class="BOTONES" id="borrar">
                 <a><input type="button" value="BORRAR USUARIOS"></a>
@@ -45,9 +39,9 @@
             </thead>
             <tbody id="cuerpo">
                 <?php
-                    require_once "../HELPERS/AUTOLOAD.php";
+                    require_once "../AUTOESCUELA/HELPERS/AUTOLOAD.php";
                     AUTOLOAD::AutoLoad();
-                    $Users=USER_REPOSITORY::FindAll();
+                    $Users=USER_REPOSITORY::FindRolNull();
 
                     for ($i=0;$i<count($Users);$i++) {
                         $User=$Users[$i];

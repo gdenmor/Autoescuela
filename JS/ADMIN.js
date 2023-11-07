@@ -24,19 +24,30 @@ window.addEventListener("load",function(){
 
                     var userData = {
                         id: id,
-                        usuario: usuario,
-                        contrasena: contrasena,
+                        username: usuario,
+                        password: contrasena,
                         rol: rolSeleccionado
                     };
 
+                    var id = userData.id.trim();
 
-                    fetch("../FORMS/ADMIN_ROL.php",{
-                        method: "POST",
+
+                    fetch("../AUTOESCUELA/APIS/USUARIOAPI.php?id="+id,{
+                        method: "PUT",
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(userData)
                     })
+                        .then(response => {
+                            if (response.ok) {
+                                // Si la solicitud PUT fue exitosa (código de respuesta 200), redirige a la página actual
+                                window.location.reload();
+                            } else {
+                                // Manejar errores si es necesario
+                                console.error("Error al actualizar usuario");
+                            }
+                        })
                 });
             }
         }

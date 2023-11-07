@@ -19,6 +19,10 @@ if (isset($_GET['menu'])) {
         require_once '../Autoescuela/FORMS/ADMIN_ROL.php';
      
     }
+
+    if ($_GET['menu']=="crea"){
+        require_once "../Autoescuela/FORMS/CREAUSUARIOS.php";
+    }
 }
 
     
