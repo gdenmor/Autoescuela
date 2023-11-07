@@ -17,9 +17,7 @@
         $id=$_GET["id"];
         parse_str($cuerpo, $_PUT);
         $_PUT['id'] = $id;
-        //$objeto=file_get_contents("php://input");
-        //$usuario=json_decode($objeto);
-        $Dificultad=new DIFICULTAD($_PUT['id'],"Medio");
+        $Dificultad=json_decode($cuerpo);
         DIFICULTAD_REPOSITORY::UpdateById($id,$Dificultad);
         echo "Dificultad actualizada";
     }
@@ -29,15 +27,13 @@
         $id=$_GET["id"];
         parse_str($id, $_DELETE);
         $_DELETE['id'] = $id;
-        //$objeto=file_get_contents("php://input");
-        //$usuario=json_decode($objeto);
         DIFICULTAD_REPOSITORY::DeleteById($_DELETE['id']);
         echo "Dificultad borrada";
     }
     //AÑADE
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        //$objeto=file_get_contents("php://input");
-        $Dificultad=new DIFICULTAD(1,"Fácil");
+        $objeto=file_get_contents("php://input");
+        $Dificultad=json_decode($objeto);
         DIFICULTAD_REPOSITORY::Insert($Dificultad);
         echo "Dificultad insertada";
     }

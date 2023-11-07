@@ -1,26 +1,26 @@
 <?php
     class TRYS{
-        private $idTry;
-        private $User;
-        private $fecha;
-        private $JSONrespuestas;
-        private $Examen;
+        public $idTry;
+        public $User;
+        public $fecha;
+        public $JSONrespuestas;
+        public $idExamen;
 
-        public function __construct($idTry, $User, $fecha,$JSONrespuestas,$Examen){
+        public function __construct($idTry, $User, $fecha,$JSONrespuestas){
             $this->idTry = $idTry;
             $this->User = $User;
             $this->fecha = $fecha;
             $this->JSONrespuestas = json_decode($JSONrespuestas);
-            $this->Examen = $Examen;
         }
 
-        public function getExamen(){
-            return $this->Examen;
+        public function getIdExamen(){
+            return $this->idExamen;
         }
 
-        public function setExamen($Examen){
-            $this->Examen = $Examen;
+        public function setIdExamen($idexamen){
+            $this->idExamen = $idexamen;
         }
+        
 
         public function getIdTry(){
             return $this->idTry;

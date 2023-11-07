@@ -4,7 +4,8 @@
     class DIFICULTAD_REPOSITORY{
         public static function FindAll(){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from DIFICULTAD");
+            $resultado=$conexion->prepare("SELECT * from DIFICULTAD");
+            $resultado->execute();
 
             $idDificultad=null;
 
@@ -50,7 +51,9 @@
 
         public static function FindBy($idDificultad) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM DIFICULTAD WHERE idDificultad='$idDificultad'");
+            $resultado = $conexion->prepare("SELECT * FROM DIFICULTAD WHERE idDificultad=:idDificultad");
+            $resultado->bindParam(':idDificultad', $idDificultad, PDO::PARAM_INT);
+            $resultado->execute();
         
             $Categoria = null;
         

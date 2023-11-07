@@ -4,7 +4,8 @@
     class PREGUNTA_REPOSITORY{
         public static function FindAll(){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from PREGUNTA");
+            $resultado=$conexion->prepare("SELECT * from PREGUNTA");
+            $resultado->execute();
 
             $idPregunta=null;
 
@@ -75,7 +76,9 @@
 
         public static function FindBy($idPregunta) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM PREGUNTA WHERE idPregunta='$idPregunta'");
+            $resultado = $conexion->prepare("SELECT * FROM PREGUNTA WHERE idPregunta=:idPregunta");
+            $resultado->bindParam(':idPregunta', $idPregunta, PDO::PARAM_INT);
+            $resultado->execute();
         
             $Pregunta = null;
         
@@ -104,7 +107,9 @@
 
         public static function PreguntasdeUnExamen($idExamen){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from examen_pregunta where examen_id=$idExamen");
+            $resultado=$conexion->prepare("SELECT * from examen_pregunta where examen_id=:idExamen");
+            $resultado->bindParam(':idExamen', $idExamen, PDO::PARAM_INT);
+            $resultado->execute();
 
             $idPregunta=null;
 

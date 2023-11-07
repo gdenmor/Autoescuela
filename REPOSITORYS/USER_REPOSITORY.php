@@ -4,7 +4,10 @@
     class USER_REPOSITORY{
         public static function FindByUsuario($usuario,$contraseña){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from USUARIO where nombre= '$usuario' and contraseña= '$contraseña'");
+            $resultado=$conexion->prepare("SELECT * from USUARIO where nombre= :usuario and contraseña= :contraseña");
+            $resultado->bindParam(':contraseña', $contraseña, PDO::PARAM_INT);
+            $resultado->bindParam(':usuario', $usuario, PDO::PARAM_INT);
+            $resultado->execute();
 
             $id=null;
 
@@ -33,7 +36,8 @@
         }
         public static function FindAll(){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from USUARIO");
+            $resultado=$conexion->prepare("SELECT * from USUARIO");
+            $resultado->execute();
 
             $id=null;
 
@@ -87,7 +91,9 @@
 
         public static function FindBy($id) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM USUARIO WHERE id='$id'");
+            $resultado = $conexion->prepare("SELECT * FROM USUARIO WHERE id= :id");
+            $resultado->bindParam(":id",$id,PDO::PARAM_INT);
+            $resultado->execute();
         
             $User = null;
         

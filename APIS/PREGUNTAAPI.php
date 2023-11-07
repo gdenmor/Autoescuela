@@ -36,11 +36,7 @@
         $id=$_GET["id"];
         parse_str($cuerpo, $_PUT);
         $_PUT['id'] = $id;
-        //$objeto=file_get_contents("php://input");
-        //$usuario=json_decode($objeto);
-        $Categoria=new CATEGORIA(1,"Prioridad de paso");
-        $Dificultad=new DIFICULTAD(1,"Medio");
-        $Pregunta=new PREGUNTA($_PUT['id'], $Categoria,$Dificultad, '¿sdvvdsdssd?', 'Paris', 'Bedvdsvdsn', 'Madrid', 1, null,null);
+        $Pregunta=json_decode($cuerpo);
         PREGUNTA_REPOSITORY::UpdateById($id,$Pregunta);
         echo "Pregunta actualizada";
     }
@@ -50,17 +46,13 @@
         $id=$_GET["id"];
         parse_str($id, $_DELETE);
         $_DELETE['id'] = $id;
-        //$objeto=file_get_contents("php://input");
-        //$usuario=json_decode($objeto);
         PREGUNTA_REPOSITORY::DeleteById($_DELETE['id']);
         echo "Pregunta borrada";
     }
     //AÑADE
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        //$objeto=file_get_contents("php://input");
-        $Categoria=new CATEGORIA(1,"Prioridad de paso");
-        $Dificultad=new DIFICULTAD(1,"Medio");
-        $Pregunta=new PREGUNTA(null, $Categoria,$Dificultad, '¿Otra?', 'Paris', 'Bedvdsvdsn', 'Madrid', 1, null,null);
+        $objeto=file_get_contents("php://input");
+        $Pregunta=json_decode($objeto);
         PREGUNTA_REPOSITORY::Insert($Pregunta);
         echo "Pregunta insertada";
 

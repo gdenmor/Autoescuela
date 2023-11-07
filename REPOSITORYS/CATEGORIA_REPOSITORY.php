@@ -4,7 +4,8 @@
     class CATEGORIA_REPOSITORY{
         public static function FindAll(){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from CATEGORIA");
+            $resultado=$conexion->prepare("SELECT * from CATEGORIA");
+            $resultado->execute();
 
             $idCategoria=null;
 
@@ -51,7 +52,9 @@
 
         public static function FindBy($idCategoria) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM CATEGORIA WHERE idCategoria=$idCategoria");
+            $resultado = $conexion->prepare("SELECT * FROM CATEGORIA WHERE idCategoria=:idCategoria");
+            $resultado->bindParam(':idCategoria', $idCategoria, PDO::PARAM_INT);
+            $resultado->execute();
         
             $Categoria = null;
         

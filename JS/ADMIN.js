@@ -36,15 +36,6 @@ window.addEventListener("load",function(){
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(userData)
-                    }).then(x=>x.json()
-                       
-                        /*var p=document.createElement("p");
-                        p.innerHTML=x.json();
-                        document.body.appendChild(p);*/
-                    )
-
-                    .then(y=>{
-                        alert(y);
                     })
                 });
             }

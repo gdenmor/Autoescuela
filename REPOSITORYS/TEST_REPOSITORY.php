@@ -4,7 +4,8 @@
     class TEST_REPOSITORY{
         public static function FindAll(){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from EXAMEN");
+            $resultado=$conexion->prepare("SELECT * from EXAMEN");
+            $resultado->execute();
 
             $i=0;
             $array=null;
@@ -49,9 +50,11 @@
 
         public static function FindBy($idExamen) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM EXAMEN WHERE idExamen='$idExamen'");
+            $resultado = $conexion->prepare("SELECT * FROM EXAMEN WHERE idExamen=:idExamen");
         
-            $Examen = null;
+            $resultado->bindParam(':idExamen', $idExamen, PDO::PARAM_INT);
+
+            $resultado->execute();
         
             if ($resultado) {
                 $tuplas = $resultado->fetch(PDO::FETCH_OBJ);
@@ -72,12 +75,14 @@
 
         public static function UsuariosEXAMEN($idExamen){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT U.*
+            $resultado=$conexion->prepare("SELECT U.*
                                         FROM USUARIO U
                                         JOIN INTENTO I ON U.id = I.id
                                         JOIN EXAMEN E ON I.idExamen = E.idExamen
-                                        where E.idExamen='$idExamen'
+                                        where E.idExamen=:idExamen
                                         ");
+            $resultado->bindParam(':idExamen', $idExamen, PDO::PARAM_INT);
+            $resultado->execute();
 
             $i=0;
             $array=null;

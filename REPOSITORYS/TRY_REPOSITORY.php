@@ -4,7 +4,9 @@
     class TRY_REPOSITORY{
         public static function FindAll(){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->query("SELECT * from INTENTO");
+            $resultado=$conexion->prepare("SELECT * from INTENTO");
+
+            $resultado->execute();
 
             $idIntento=null;
 
@@ -23,8 +25,7 @@
                 $JSONRespuestas=$tuplas->JSONRespuestas;
                 $fechaRealizado=$tuplas->fecha;
                 $idExamen=$tuplas->idExamen;
-                $Examen=TEST_REPOSITORY::FindBy($idExamen);
-                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$Examen);
+                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen);
                 $array[$i]=$Intento;
                 $i++;
             }
@@ -62,31 +63,34 @@
 
         public static function FindBy($idIntento) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM INTENTO WHERE idIntento='$idIntento'");
+            $resultado = $conexion->prepare("SELECT * FROM INTENTO WHERE idIntento= :idIntento");
+            $resultado->bindParam(':idIntento', $idIntento, PDO::PARAM_INT);
+            
+            $resultado->execute();
+
+
+
+            $Intento=null;
+
+
         
-            $User = null;
-        
-            if ($resultado) {
-                $tupla = $resultado->fetch(PDO::FETCH_OBJ);
-        
-                if ($tupla) {
-                    $idIntento=$tupla->idIntento;
-                    $idUser=$tupla->id;
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                    $idIntento=$tuplas->idIntento;
+                    $idUser=$tuplas->id;
                     $User=USER_REPOSITORY::FindBy($idUser);
-                    $JSONRespuestas=$tupla->JSONRespuestas;
-                    $fechaRealizado=$tupla->fecha;
-                    $idExamen=$tupla->idExamen;
-                    $Examen=TEST_REPOSITORY::FindBy($idExamen);//QUEDA OBTENER UN EXAMEN
-                    $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$Examen);
-                }
+                    $JSONRespuestas=$tuplas->JSONRespuestas;
+                    $fechaRealizado=$tuplas->fecha;
+                    $idExamen=$tuplas->idExamen;
+                    $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen);
             }
-        
-            return $User;
+            return $Intento;
         }
 
         public static function IntentosdeUnExamen($idExamen) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM INTENTO WHERE idExamen='$idExamen'");
+            $resultado = $conexion->prepare("SELECT * FROM INTENTO WHERE idExamen= :idExamen");
+            $resultado->bindParam(':idExamen', $idExamen, PDO::PARAM_INT);
+            $resultado->execute();
         
             $User = null;
             $array=null;
@@ -100,8 +104,7 @@
                 $JSONRespuestas=$tuplas->JSONRespuestas;
                 $fechaRealizado=$tuplas->fecha;
                 $idExamen=$tuplas->idExamen;
-                $Examen=TEST_REPOSITORY::FindBy($idExamen);
-                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$Examen);
+                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen);
                 $array[$i]=$Intento;
                 $i++;
             }
@@ -111,7 +114,9 @@
 
         public static function IntentosdeUnUsuario($idUsuario) {
             $conexion = CONEXION::AbreConexion();
-            $resultado = $conexion->query("SELECT * FROM INTENTO WHERE id='$idUsuario'");
+            $resultado = $conexion->prepare("SELECT * FROM INTENTO WHERE id= :idUsuario");
+            $resultado->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
+            $resultado->execute();
         
             $User = null;
             $array=null;
@@ -125,8 +130,7 @@
                 $JSONRespuestas=$tuplas->JSONRespuestas;
                 $fechaRealizado=$tuplas->fecha;
                 $idExamen=$tuplas->idExamen;
-                $Examen=TEST_REPOSITORY::FindBy($idExamen);
-                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$Examen);
+                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen);
                 $array[$i]=$Intento;
                 $i++;
             }

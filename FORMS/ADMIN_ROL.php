@@ -4,8 +4,8 @@
 
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $Usuario=file_get_contents("php://input");
-            echo $Usuario;
+        $Usuario=file_get_contents("php://input");
+        echo $Usuario;
     }
 
 ?>

@@ -1,9 +1,9 @@
 <?php
     class USER{
-        private $id;
-        private $username;
-        private $password;
-        private $rol;
+        public $id;
+        public $username;
+        public $password;
+        public $rol;
 
         
 

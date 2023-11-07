@@ -5,10 +5,10 @@
 
         public static function AbreConexion(){
             if (CONEXION::$conexion==null){
-                $conexion=new PDO("mysql:host=localhost;dbname=proyecto_autoescuela","root","Root");
+                CONEXION::$conexion=new PDO("mysql:host=localhost;dbname=proyecto_autoescuela","root","Root");
             }
 
-            return $conexion;
+            return CONEXION::$conexion;
         }
 
     }
