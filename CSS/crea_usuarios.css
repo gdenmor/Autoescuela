@@ -8,35 +8,12 @@
     float: right;
 }
 
-table{
-    width: 100%;
-    margin-top: 3%;
-}
-table tbody tr td{
-    text-align: center;
-}
-
-table thead tr td{
-    text-align: center;
-}
-
-table tbody tr td{
-    background-color: white;
-}
-
-table thead{
-    background-color: gray;
-}
-
 #historico{
     margin-top: 2%;
     background-color: white;
 }
 
-body{
-    background-image: url("../IMAGES/autoescuela.jpg");
-    background-size: cover;
-}
+
 
 
 .imagen{
@@ -67,4 +44,25 @@ body{
 #CIERRA input{
     background-color: black;
     color: white;
+}
+
+#divcrea{
+    margin-top: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar horizontalmente */
+    justify-content: center;
+}
+
+#divcrea table thead th{
+    background-color: gray;
+}
+
+#divcrea table tbody tr td{
+    background-color: white;
+    text-align: center;
+}
+
+#divcrea table{
+    width: 100%;
 }

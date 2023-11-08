@@ -26,7 +26,8 @@
                 $usuario=$tuplas->nombre;
                 $contrasenia=$tuplas->contraseña;
                 $rol=$tuplas->rol;
-                $User=new USER($id,$usuario,$contrasenia,$rol);
+                $validado=$tuplas->validado;
+                $User=new USER($id,$usuario,$contrasenia,$rol,$validado);
                 $i++;
             }
 
@@ -55,7 +56,8 @@
                 $usuario=$tuplas->nombre;
                 $contrasena=$tuplas->contraseña;
                 $rol=$tuplas->rol;
-                $User=new USER($id,$usuario,$contrasena,$rol);
+                $validado=$tuplas->validado;
+                $User=new USER($id,$usuario,$contrasena,$rol,$validado);
                 $array[$i]=$User;
                 $i++;
             }
@@ -77,7 +79,7 @@
             $password=$objetoActualizado->password;
             $rol=$objetoActualizado->rol;
 
-            $resultado=$conexion->exec("UPDATE USUARIO set nombre='$usuario', contraseña='$password', rol='$rol' where id='$id'");
+            $resultado=$conexion->exec("UPDATE USUARIO set nombre='$usuario', contraseña='$password', rol='$rol',validado='1' where id='$id'");
         }
         public static function Insert($objeto){
             $conexion=CONEXION::AbreConexion();
@@ -105,7 +107,8 @@
                     $usuario = $tupla->nombre;
                     $contrasenia = $tupla->contraseña;
                     $rol = $tupla->rol;
-                    $User = new USER($id, $usuario, $contrasenia, $rol);
+                    $validado=$tupla->validado;
+                    $User = new USER($id, $usuario, $contrasenia, $rol,$validado);
                 }else{
                     return false;
                 }
@@ -138,7 +141,8 @@
                 $usuario=$tuplas->nombre;
                 $contrasenia=$tuplas->contraseña;
                 $rol=$tuplas->rol;
-                $User=new USER($id,$usuario,$contrasenia,$rol);
+                $validado=$tuplas->validado;
+                $User=new USER($id,$usuario,$contrasenia,$rol,$validado);
                 $Users[]=$User;
                 $i++;
             }

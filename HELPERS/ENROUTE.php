@@ -23,6 +23,16 @@ if (isset($_GET['menu'])) {
     if ($_GET['menu']=="crea"){
         require_once "../Autoescuela/FORMS/CREAUSUARIOS.php";
     }
+
+    if ($_GET['menu']=="borra"){
+        require_once "../Autoescuela/FORMS/BORRAUSUARIOS.php";
+    }
+
+    if ($_GET['menu']=="examen"){
+        require_once "../Autoescuela/FORMS/EXAMEN.php";
+    }
+
+
 }
 
     

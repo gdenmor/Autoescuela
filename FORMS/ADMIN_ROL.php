@@ -1,35 +1,34 @@
 <?php
-    require_once "../AUTOESCUELA/HELPERS/AUTOLOAD.php";
-    AUTOLOAD::AutoLoad();
+    SESSION::CreaSesion();
+    
+    if ($_SERVER["REQUEST_METHOD"]=="POST"){
+        $logout=isset($_POST["logout"]) ? $_POST["logout"] :"";
+        if ($logout){
+            SESSION::Cerrar_Sesion();
+        }
+    }
+
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../AUTOESCUELA/CSS/admin_rol.css">
-    <script src="../AUTOESCUELA/JS/ADMIN.js"></script>
-</head>
-<body>
-    <div>
+    <div id="admin">
         <nav id="navegacion">
             <div>
-                <img src="../AUTOESCUELA/IMAGES/LOGO.png">
+                <a href="http://localhost/AUTOESCUELA/index.php?menu=admin"><img src="../AUTOESCUELA/IMAGES/LOGO.png"></a>
             </div>
             <div class="BOTONES">
                 <a href="http://localhost/AUTOESCUELA/index.php?menu=crea"><input type="button" value="CREAR USUARIOS"></a>
             </div>
             <div class="BOTONES" id="borrar">
-                <a><input type="button" value="BORRAR USUARIOS"></a>
+                <a href="http://localhost/AUTOESCUELA/index.php?menu=borra"><input type="button" value="BORRAR USUARIOS"></a>
             </div>
+            <form method="post">
             <div id="CIERRA">
-                <input type="submit" value="CERRAR SESIÓN">
+                <input type="submit" value="CERRAR SESIÓN" name="logout">
             </div>
+            </form>
         </nav>
-        <table border="1">
+        <div id="divtabla">
+        <table id="table" border="1">
             <thead>
                 <th>ID</th>
                 <th>USUARIO</th>
@@ -39,8 +38,6 @@
             </thead>
             <tbody id="cuerpo">
                 <?php
-                    require_once "../AUTOESCUELA/HELPERS/AUTOLOAD.php";
-                    AUTOLOAD::AutoLoad();
                     $Users=USER_REPOSITORY::FindRolNull();
 
                     for ($i=0;$i<count($Users);$i++) {
@@ -51,7 +48,7 @@
                                 <td> ' .$User->getUsername(). '</td>
                                 <td>'. $User->getPassword(). '</td>
                                 <td>  <select> <option> ALUMNO </option> <option> PROFESOR </option> </td>
-                                <td><form method="post" class="user_form"><input id="aceptar" class="acepta" name="aceptar'.$i.'" type="submit" value="+"></form> </td>
+                                <td><form method="post" class="user_form"><input id="aceptar" class="aceptar" name="aceptar'.$i.'" type="submit" value="+"></form> </td>
                             </tr>';
                     }
 
@@ -59,7 +56,6 @@
                 ?>
             </tbody>
         </table>
+        </div>
         </form>
     </div>
-</body>
-</html>

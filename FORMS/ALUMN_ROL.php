@@ -1,5 +1,4 @@
 <?php
-    AUTOLOAD::AutoLoad();
     SESSION::CreaSesion();
     $User = SESSION::leer_session("USER");
     if ($User==null){
@@ -12,21 +11,9 @@
         }
     }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="CSS/alumn_rol.css">
-    <script src="JS/ROL_ALUMN.js"></script>
-</head>
-
-<body>
-    <div id="container">
+    <div id="container-alumno">
         <div id="menu">
-            <nav>
+            <nav id="nav-alumno">
                 <div class="elementos" id="logo">
                     <img src="IMAGES/LOGO.png">
                 </div>
@@ -74,6 +61,3 @@
 
 
     </div>
-</body>
-
-</html>

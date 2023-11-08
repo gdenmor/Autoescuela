@@ -4,9 +4,7 @@ window.addEventListener("load",function(){
     var j=0;
     var respuestas=[];
     
-    
-    
-    this.fetch("../examenprueba.json")
+    this.fetch("../AUTOESCUELA/examenprueba.json")
         .then(x=>x.json())
         .then(y=>{
             var preguntas = y.Examen.preguntas;
@@ -24,7 +22,6 @@ window.addEventListener("load",function(){
             divs[j].classList.remove("OCULTA");
 
             siguiente.addEventListener("click", function () {
-                debugger;
                 divs[j].classList.add("OCULTA"); // Oculta la pregunta actual
                 j++;
                 if (j>=preguntas.length){
@@ -34,7 +31,6 @@ window.addEventListener("load",function(){
               },false);
 
               anterior.addEventListener("click", function () {
-                debugger;
                 divs[j].classList.add("OCULTA"); // Oculta la pregunta actual
                 j--;
                 if (j<0){
@@ -63,7 +59,7 @@ window.addEventListener("load",function(){
                 var divpregunta = document.createElement("div");
                 var pregunta = preguntas[i];
                 var imagen = document.createElement("img");
-                var ruta = "../" + pregunta.imagen;
+                var ruta = "../AUTOESCUELA/" + pregunta.imagen;
                 imagen.src = ruta;
                 var p = document.createElement("p");
                 var enunciado = pregunta.enunciado;
@@ -90,7 +86,7 @@ window.addEventListener("load",function(){
                 input3.setAttribute("type", "radio");
                 input3.setAttribute("name", "rep" + i);
 
-                var inputs=[input1,input2,input3];
+                const inputs=[input1,input2,input3];
         
                 var prep1 = document.createElement("p");
                 prep1.innerHTML = respuestas[0].respuesta;
@@ -138,12 +134,15 @@ window.addEventListener("load",function(){
                 inputborra.id="borra"+i;
 
 
-                inputborra.addEventListener("click",function(){
-                    alert(input1.checked)
+                inputborra.addEventListener("click",function(ev){
+                    ev.preventDefault();
                     for (let i=0;i<inputs.length;i++){
                         inputs[i].checked=false;
+                        console.log(inputs[i]);
                     }
-                })
+                });
+
+
                 borrar.appendChild(inputborra);
 
 
@@ -155,6 +154,7 @@ window.addEventListener("load",function(){
                 divpregunta.appendChild(borrar);
 
                 divpregunta.classList.add("Hola");
+
         
                 contenedor.appendChild(divpregunta);
 
@@ -165,9 +165,6 @@ window.addEventListener("load",function(){
                 
 
             }
-                    
-            
-
 
         }
 

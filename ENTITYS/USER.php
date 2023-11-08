@@ -4,14 +4,16 @@
         public $username;
         public $password;
         public $rol;
+        public $validado;
 
         
 
-        public function __construct($id,$username, $password,$rol){
+        public function __construct($id,$username, $password,$rol,$validado){
             $this->id = $id;
             $this->username = $username;
             $this->password = $password;
             $this->rol = $rol;
+            $this->validado = $validado;
         }
 
     

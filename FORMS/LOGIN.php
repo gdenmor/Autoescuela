@@ -29,12 +29,14 @@
     
                         if ($existe) {
                             if ($User->rol !== "") {
-                                if ($User->rol == "ALUMNO") {
+                                if ($User->rol == "ALUMNO" && $User->validado==1) {
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=alumno");
-                                } else if ($User->rol == "PROFESOR") {
+                                } else if ($User->rol == "PROFESOR" && $User->validado== 1) {
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=profesor");
-                                }else if ($User->rol == "ADMINISTRADOR") {
+                                }else if ($User->rol == "ADMINISTRADOR" && $User->validado==1) {
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=admin");
+                                }else{
+                                    $mensajeError="No está validado";
                                 }
                             } else if ($User->rol==null){
                                 $mensajeError = "El usuario está a la espera de ser aprobado";
@@ -64,7 +66,7 @@
                             $mensajeError = "El usuario ya existe";
                         } else {
                             if ((strlen($usuario)>0&&strlen($usuario)<=45)&&(strlen($password)>0&&strlen($password)<=45)){
-                                $User = new USER($id,$usuario, $password, null);
+                                $User = new USER($id,$usuario, $password, null,0);
                                 USER_REPOSITORY::Insert($User);
                             }else{
                                 $mensajeError="Debe de tener entre 1 y 45 caracteres tanto el usuario como la contraseña";
@@ -72,7 +74,7 @@
                         }
                     }else{
                         if ((strlen($usuario)>0&&strlen($usuario)<=45)&&(strlen($password)>0&&strlen($password)<=45)){
-                            $User = new USER($id,$usuario, $password, null);
+                            $User = new USER($id,$usuario, $password, null,0);
                             USER_REPOSITORY::Insert($User);
                         }else{
                             $mensajeError="Debe de tener entre 1 y 45 caracteres tanto el usuario como la contraseña";
@@ -88,21 +90,11 @@
             
             ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="CSS/login.css">
-</head>
-
-<body id="cuerpo">
+    <div id="container-login">
     <div id="contenedor">
-        <main>
+        <main id="main-login">
             <section id="imagen">
-                <img src="IMAGES/LOGO.png">
+                <img src="../AUTOESCUELA/IMAGES/LOGO.png">
             </section>
         <form method="post">
             <section id="usuario">
@@ -144,6 +136,4 @@
         </main>
         
     </div>
-</body>
-
-</html>
+</div>

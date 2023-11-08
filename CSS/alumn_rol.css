@@ -1,9 +1,4 @@
-body{
-    background-image: url("../IMAGES/autoescuela.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-nav{
+#nav-alumno{
     display: flex;
     flex-direction: row;
 }

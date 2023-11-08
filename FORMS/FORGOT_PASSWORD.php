@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             for ($i = 0; $i < count($users); $i++) {
                 if ($users[$i]->getUsername() == $usuario) {
                     $existe = true;
-                    $user = new User($users[$i]->getId(), $users[$i]->getUsername(), $users[$i]->getPassword(), $users[$i]->getRol());
+                    $user = new User($users[$i]->getId(), $users[$i]->getUsername(), $users[$i]->getPassword(), $users[$i]->getRol(),$users[$i]->validado);
                 }
             }
 
@@ -46,23 +46,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contraseña olvidada</title>
-    <link rel="stylesheet" href="CSS/forgot_password.css">
-</head>
-
-<body id="cuerpo">
-    <div id="container">
-        <div id="enlace">
-            <h2 id="letralink"><u>¿Has olvidado tú contraseña?</u></h2>
+<div id="html">
+    <div id="container-forgot">
+        <div id="enlace-forgot">
+            <h2 id="letralink-forgot"><u>¿Has olvidado tú contraseña?</u></h2>
         </div>
         <form method="post" id="form" action="FORGOT_PASSWORD.php">
-            <div class="campos">
+            <div class="campos-forgot">
                 <div>
                     <label> Introduzca su usuario: </label>
                 </div>
@@ -70,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="text" name="user" size="45">
                 </div>
             </div>
-            <div class="campos">
+            <div class="campos-forgot">
                 <div>
                     <label> Introduzca su nueva contraseña: </label>
                 </div>
@@ -78,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="password" name="password" size="45">
                 </div>
             </div>
-            <div class="campos">
+            <div class="campos-forgot">
                 <div>
                     <label> Repita la contraseña de nuevo: </label>
                 </div>
@@ -86,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="password" name="repeat_password" size="45">
                 </div>
             </div>
-            <div id="cambiar">
+            <div id="cambiar-forgot">
                 <input type="submit" value="CAMBIAR CONTRASEÑA">
             </div>
         </form>
@@ -99,6 +90,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ?>
         </div>
     </div>
-</body>
-
-</html>
+</div>

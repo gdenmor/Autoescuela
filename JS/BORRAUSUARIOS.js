@@ -6,7 +6,7 @@ window.addEventListener("load",function(){
     for (let i=0;i<filas.length;i++){
                 var datos=filas[i].getElementsByTagName("td");
 
-                var aceptar = filas[i].getElementsByClassName("aceptar")[0];
+                var aceptar = filas[i].getElementsByClassName("acepta")[0];
 
 
             
@@ -33,21 +33,21 @@ window.addEventListener("load",function(){
 
 
                     fetch("../AUTOESCUELA/APIS/USUARIOAPI.php?id="+id,{
-                        method: "PUT",
+                        method: "DELETE",
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(userData)
                     })
-                    .then(response => {
-                        if (response.ok) {
-                            // Si la solicitud PUT fue exitosa (código de respuesta 200), redirige a la página actual
-                            window.location.reload();
-                        } else {
-                            // Manejar errores si es necesario
-                            console.error("Error al actualizar el usuario");
-                        }
-                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // Si la solicitud PUT fue exitosa (código de respuesta 200), redirige a la página actual
+                                window.location.reload();
+                            } else {
+                                // Manejar errores si es necesario
+                                console.error("Error al borrar el usuario");
+                            }
+                        })
                 });
             }
         }

@@ -28,6 +28,8 @@
         }
     }
 
+    AUTOLOAD::AutoLoad();
+
 
     
 ?>

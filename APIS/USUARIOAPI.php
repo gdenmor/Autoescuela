@@ -14,11 +14,11 @@
     }
     //ACTUALIZA
     if ($_SERVER["REQUEST_METHOD"]=="PUT"){
-        $_PUT = array();
+        //$_PUT = array();
         $cuerpo = file_get_contents("php://input");
         $id=$_GET["id"];
-        parse_str($cuerpo, $_PUT);
-        $_PUT['id'] = $id;
+        /*parse_str($cuerpo, $_PUT);
+        $_PUT['id'] = $id;*/
         $usuario=json_decode($cuerpo);
 
         $user=new stdClass();
@@ -26,17 +26,16 @@
         $user->username=$usuario->username;
         $user->password=$usuario->password;
         $user->rol=$usuario->rol;
-        var_dump ($usuario);
         USER_REPOSITORY::UpdateById($id,$user);
         echo "Usuario actualizado";
     }
     //BORRA
     if ($_SERVER["REQUEST_METHOD"]=="DELETE"){
-        $_DELETE = array();
+        //$_DELETE = array();
         $id=$_GET["id"];
-        parse_str($id, $_DELETE);
-        $_DELETE['id'] = $id;
-        USER_REPOSITORY::DeleteById($_DELETE['id']);
+        //parse_str($id, $_DELETE);
+        //$_DELETE['id'] = $id;
+        USER_REPOSITORY::DeleteById($id);
         echo "Usuario borrado";
     }
     //AÑADE
