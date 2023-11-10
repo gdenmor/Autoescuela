@@ -2,14 +2,19 @@ window.addEventListener("load",function(){
     var divpreguntas=this.document.getElementsByClassName("OCULTA");
     var container=this.document.getElementById("container");
     var j=0;
-    var respuestas=[];
+    var params=new URLSearchParams(this.window.location.search);
+    var id=params.get('examen');
+    var idUser=params.get('usuario');
     
-    this.fetch("../AUTOESCUELA/examenprueba.json")
+    this.fetch("../AUTOESCUELA/APIS/EXAMENAPI.php?id="+id,{
+    })
         .then(x=>x.json())
         .then(y=>{
             var preguntas = y.Examen.preguntas;
 
-            mostrarPregunta(divpreguntas, preguntas,container);
+            const respuestasJSON = Array(preguntas.length).fill(0);
+
+            mostrarPregunta(divpreguntas, preguntas,container,respuestasJSON);
             
             muestraBotones(container);
 
@@ -39,28 +44,41 @@ window.addEventListener("load",function(){
                 divs[j].classList.remove("OCULTA");
               },false);
 
-            
-            
+              var finalizar=this.document.getElementById("finalizar").addEventListener("click",function(){
+                var fecha=new Date();
+                var string=fecha.getFullYear()+"-"+fecha.getMonth()+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+                    var intento={
+                        idUser: idUser,
+                        fecha: string,
+                        JSON: JSON.stringify(respuestasJSON),
+                        idExamen: id
+                    }
+                    fetch("../AUTOESCUELA/APIS/INTENTOAPI.php",{
+                        method: "POST",
+                        body: JSON.stringify(intento)
+                    })
+                    .then(y=>{
+                        window.location.href = 'http://localhost/AUTOESCUELA/index.php?menu=alumno';
+                    })
+                    
+                        
+              })
 
-            var finalizar=this.document.getElementById("finalizar").addEventListener("click",function(){
-                fetch("recibeexamen.php" ,{
-                    method: "POST",
-                    body: JSON.stringify(respuestas)
-                })
-            })
 
             
         
         });
 
 
-        function mostrarPregunta(divpreguntas,preguntas,contenedor) {
+        function mostrarPregunta(divpreguntas,preguntas,contenedor,respuestasJSON) {
             for (let i=0;i<preguntas.length;i++){
                 var divpregunta = document.createElement("div");
                 var pregunta = preguntas[i];
                 var imagen = document.createElement("img");
-                var ruta = "../AUTOESCUELA/" + pregunta.imagen;
-                imagen.src = ruta;
+                if (pregunta.imagen!=null){
+                    var ruta = "../AUTOESCUELA/" + pregunta.imagen;
+                    imagen.src = ruta;
+                }
                 var p = document.createElement("p");
                 var enunciado = pregunta.enunciado;
                 p.innerHTML = (i + 1) + "." + " " + enunciado;
@@ -89,13 +107,13 @@ window.addEventListener("load",function(){
                 const inputs=[input1,input2,input3];
         
                 var prep1 = document.createElement("p");
-                prep1.innerHTML = respuestas[0].respuesta;
+                prep1.innerHTML = respuestas[0].respuesta1;
         
                 var prep2 = document.createElement("p");
-                prep2.innerHTML = respuestas[1].respuesta;
+                prep2.innerHTML = respuestas[1].respuesta2;
         
                 var prep3 = document.createElement("p");
-                prep3.innerHTML = respuestas[2].respuesta;
+                prep3.innerHTML = respuestas[2].respuesta3;
         
                 var dudosa = document.createElement("div");
                 var inputdudosa = document.createElement("input");
@@ -115,6 +133,12 @@ window.addEventListener("load",function(){
                 rep1.appendChild(prep1);
                 rep2.appendChild(prep2);
                 rep3.appendChild(prep3);
+                rep1.style.display="flex";
+                rep1.style.marginBottom="0.5%";
+                rep2.style.display="flex";
+                rep2.style.marginBottom="0.5%";
+                rep3.style.display="flex";
+                rep3.style.marginBottom="0.5%";
         
                 divfoto.appendChild(imagen);
                 divfoto.appendChild(dudosa);
@@ -141,6 +165,25 @@ window.addEventListener("load",function(){
                         console.log(inputs[i]);
                     }
                 });
+
+                for (let i=0;i<inputs.length;i++){
+                    inputs[i].addEventListener("change",function(){
+                        if (inputs[i].checked==true){
+                            if (i==0){
+                                alert("1");
+                                respuestasJSON[i]=1;
+                            }else if (i==1){
+                                alert("2");
+                                respuestasJSON[i]=2;
+                            }else if (i==2){
+                                alert("3");
+                                respuestasJSON[i]=3;
+                            }else{
+                                respuestasJSON[i]=0;
+                            }
+                        }
+                    })
+                }
 
 
                 borrar.appendChild(inputborra);

@@ -2,35 +2,50 @@
     //SELECT
     require_once "../HELPERS/AUTOLOAD.php";
     AUTOLOAD::AutoLoad();
-    if ($_SERVER["REQUEST_METHOD"]=="GET"){
-        $id=$_GET['id'];
-        $Examen=TEST_REPOSITORY::FindBy($id);
-
-        $Ex=new stdClass();
-        $Ex->id=$id;
-        $Ex->fechahora=$Examen->getFechahora();
-
-        $Trys = $Examen->getIntento();
-
-        $Intento=[];
-
-        for ($i= 0;$i<count($Trys);$i++){
-            $Intento[]=$Trys[$i];
-        }
-
-        $Ex->Intentos=$Intento;
-
-        $Users=$Examen->getUser();
-
-        $Ex->Usuarios=$Users;
-
-        $Preguntas=$Examen->getPreguntas();
-
-        $Ex->preguntas=$Preguntas;
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $id = $_GET['id'];
+        if ($id != '') {
+            $Examen = TEST_REPOSITORY::FindBy($id);
     
+            $Ex = new stdClass();
+            $Ex->id = $id;
+    
+            $Preguntas = $Examen->getPreguntas();
+            $Preguntass = [];
+    
+            foreach ($Preguntas as $pregunta) {
+                $respuesta1 = $pregunta->getr1();
+                $respuesta2= $pregunta->getrep2();
+                $respuesta3=$pregunta->getrep3();
+                $respuestas = [$respuesta1,$respuesta2,$respuesta3];
+                $respuestasArray=[];
+
+                $i=1;
+    
+                foreach ($respuestas as $respuesta) {
+                    $respuestasArray[] = [
+                        "respuesta".$i => $respuesta
+                    ];
+                    $i++;
+                }
+    
+                $Preguntass[] = [
+                    "id" => $pregunta->getId(),
+                    "Categoria" => $pregunta->getCategoria(),
+                    "Dificultad" => $pregunta->getDificultad(),
+                    "enunciado" => $pregunta->getEnunciado(),
+                    "imagen" => $pregunta->getUrl(),
+                    "tipo" => $pregunta->getTipo(),
+                    "respuestas" => $respuestasArray
+            ];
+        }
+    
+        $Ex->preguntas = $Preguntass;
+    
+        echo json_encode(["Examen" => $Ex]);
+
+        }
         
-        
-        echo json_encode($Ex);
     }
 
     //ACTUALIZA

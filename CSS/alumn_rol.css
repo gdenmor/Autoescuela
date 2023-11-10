@@ -1,69 +1,51 @@
-#nav-alumno{
-    display: flex;
-    flex-direction: row;
-}
-
-.elementos{
-    margin-right: 20%;
-    display: flex;
-    align-items: center;
-    width: 9.7%;
-}
-
-.elementos img{
-    width: 100%;
-    height: 100%;
-}
-
 #menu{
     background-color: #D0B97D;
 }
 
-/*.elementos #logo{
-    width: 15%;
-}*/
-
-.boton {
-    background-color: #333;
+#nav-alumno {
     display: flex;
-    color: #fff;
-    width: 100%;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.elementos_desplegable{
-    margin-top: 0.5%;
-    width: 10.3%;
-    background-color: #D0B97D;
+.elementos-alumno {
+    margin: 0; /* Ajusta el margen entre elementos según sea necesario */
 }
 
-.elementos_desplegable a {
+.elementos_desplegable-alumno {
+    display: none;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.elementos-alumno:hover .elementos_desplegable-alumno {
     display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
 }
 
-#historico thead{
-    background-color: gray;
-}
-
-#historico{
-    margin-top: 2%;
-    background-color: white;
-}
-
-table{
+#loginalumno img{
     width: 100%;
-}
-table tbody tr td{
-    text-align: center;
-}
-
-table thead tr td{
-    text-align: center;
-}
-
-#login img{
-    width: 52%;
     height: 100%;
+}
+
+#loginalumno{
+    height: 100%;
+}
+
+#rol{
+    background-color: #3d8a76;
+    width: 5%;
+    height: 20%;
+}
+
+#tabla-alumno thead tr th{
+    background-color: gray;
+    text-align: center;
+}
+#tabla-alumno{
+    width: 100%;
+    border: 1;
+}
+#tabla-alumno tbody tr td{
+    background-color: white;
+    text-align: center;
 }

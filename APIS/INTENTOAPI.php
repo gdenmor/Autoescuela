@@ -54,9 +54,9 @@
     //AÑADE
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
         $objeto=file_get_contents("php://input");
-        $Intento=json_decode($objeto);
-        TRY_REPOSITORY::Insert($Pregunta);
-        echo "Pregunta insertada";
+        $intento=json_decode($objeto);
+        print_r($intento);
+        TRY_REPOSITORY::Insert($intento);
 
     }
 

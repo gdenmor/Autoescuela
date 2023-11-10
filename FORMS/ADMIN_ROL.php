@@ -12,7 +12,7 @@
 ?>
     <div id="admin">
         <nav id="navegacion">
-            <div>
+            <div id="si">
                 <a href="http://localhost/AUTOESCUELA/index.php?menu=admin"><img src="../AUTOESCUELA/IMAGES/LOGO.png"></a>
             </div>
             <div class="BOTONES">

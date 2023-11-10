@@ -15,6 +15,8 @@
     <script src="../AUTOESCUELA/JS/BORRAUSUARIOS.js"></script>
     <link rel="stylesheet" href="../AUTOESCUELA/CSS/login.css">
     <link rel="stylesheet" href="../Autoescuela/CSS/forgot_password.css">
+    <link rel="stylesheet" href="../Autoescuela/CSS/alumn_rol.css">
+    <script src="../Autoescuela/JS/ROL_ALUMN.js"></script>
 </head>
 <body>
     <?php

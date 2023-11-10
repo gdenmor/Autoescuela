@@ -53,12 +53,12 @@
         public static function Insert($objeto){
             $conexion=CONEXION::AbreConexion();
 
-            $idUser=$objeto->getUser()->getId();
-            $fechaRealizado=$objeto->getfecha();
-            $JSONRespuestas=json_encode($objeto->getJsonFileRespuestas());
-            $idExamen=$objeto->getExamen()->getId();
+            $idUser=(int)$objeto->idUser;
+            $fechaRealizado=$objeto->fecha;
+            $JSONRespuestas=$objeto->JSON;
+            $idExamen=$objeto->idExamen;
 
-            $resultado=$conexion->exec("INSERT INTO INTENTO (id, fecha, JSONRespuestas,idExamen) values (upper('$idUser'),upper('$fechaRealizado'),upper('$JSONRespuestas'),'$idExamen')");
+            $resultado=$conexion->exec("INSERT INTO INTENTO (id, fecha, JSONRespuestas,idExamen) values ('$idUser','$fechaRealizado','$JSONRespuestas','$idExamen')");
         }
 
         public static function FindBy($idIntento) {

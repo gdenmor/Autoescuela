@@ -6,11 +6,12 @@
         public $JSONrespuestas;
         public $idExamen;
 
-        public function __construct($idTry, $User, $fecha,$JSONrespuestas){
+        public function __construct($idTry, $User, $fecha,$JSONrespuestas,$idExamen){
             $this->idTry = $idTry;
             $this->User = $User;
             $this->fecha = $fecha;
             $this->JSONrespuestas = json_decode($JSONrespuestas);
+            $this->idExamen = $idExamen;
         }
 
         public function getIdExamen(){

@@ -93,7 +93,8 @@
                 $usuario=$tuplas->nombre;
                 $contrasena=$tuplas->contraseña;
                 $rol=$tuplas->rol;
-                $User=new USER($id,$usuario,$contrasena,$rol);
+                $validado=$tuplas->validado;
+                $User=new USER($id,$usuario,$contrasena,$rol,$validado);
                 $array[$i]=$User;
                 $i++;
             }
@@ -101,6 +102,37 @@
             
 
             return $array;
+        }
+
+        public static function ExamenesUsuario($idUser){
+            $conexion=CONEXION::AbreConexion();
+
+            $resultado=$conexion->prepare("SELECT * from EXAMEN
+                                        where idUser=:idUser
+                                        ");
+            $resultado->bindParam(':idUser', $idUser, PDO::PARAM_INT);
+            $resultado->execute();
+
+            $i=0;
+            $array=null;
+
+
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                $id=$tuplas->idExamen;
+                $fechahora=$tuplas->fechahora;
+                $idUser=$tuplas->idUser;
+                $usuarios=TEST_REPOSITORY::UsuariosEXAMEN($id);
+                $preguntas=PREGUNTA_REPOSITORY::PreguntasdeUnExamen($id);
+                $intentos=TRY_REPOSITORY::IntentosdeUnUsuario($idUser);
+                $Examen=new TEST($id,$fechahora,$intentos,$usuarios,$preguntas);
+                $array[]=$Examen;
+                $i++;
+            }
+
+            
+
+            return $array;
+
         }
     }
 ?>
