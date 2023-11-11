@@ -5,13 +5,24 @@
         public $fecha;
         public $JSONrespuestas;
         public $idExamen;
+        public $calificacion;
 
-        public function __construct($idTry, $User, $fecha,$JSONrespuestas,$idExamen){
+        public function __construct($idTry, $User, $fecha,$JSONrespuestas,$idExamen,$calificacion){
             $this->idTry = $idTry;
             $this->User = $User;
             $this->fecha = $fecha;
             $this->JSONrespuestas = json_decode($JSONrespuestas);
             $this->idExamen = $idExamen;
+            $this->calificacion = $calificacion;
+        }
+
+        public function getCalificacion(){
+            return $this->calificacion;
+        }
+
+
+        public function setCalificacion($calificacion){
+            $this->calificacion = $calificacion;
         }
 
         public function getIdExamen(){

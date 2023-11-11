@@ -58,7 +58,7 @@ window.addEventListener("load",function(){
                         body: JSON.stringify(intento)
                     })
                     .then(y=>{
-                        window.location.href = 'http://localhost/AUTOESCUELA/index.php?menu=alumno';
+                        window.location.href = "http://localhost/AUTOESCUELA/index.php?menu=alumno";
                     })
                     
                         

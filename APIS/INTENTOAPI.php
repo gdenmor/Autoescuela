@@ -55,7 +55,17 @@
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
         $objeto=file_get_contents("php://input");
         $intento=json_decode($objeto);
-        print_r($intento);
+        $calificacion=0;
+        $respuestas=json_decode($intento->JSON);
+        $preguntas=PREGUNTA_REPOSITORY::PreguntasdeUnExamen($intento->idExamen);
+        for ($i=0;$i<count($preguntas);$i++){
+            if ($preguntas[$i]->correcta==$respuestas[$i]){
+                $calificacion=$calificacion+1;
+            }
+        }
+
+        $intento->calificacion=$calificacion;
+
         TRY_REPOSITORY::Insert($intento);
 
     }

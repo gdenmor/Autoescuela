@@ -80,6 +80,7 @@
                     <tr>
                         <th>FECHA</td>
                         <th>ID EXAMEN</th>
+                        <th>CALIFICACIÓN</th>
                         <th>VISUALIZAR</td>
                     </tr>
                 </thead>
@@ -91,9 +92,11 @@
 
                        }else{
                             for ($i= 0; $i < count($Intentos); $i++) {
+                                echo '<input class="idIntento" type="hidden" value="'.$Intentos[$i]->getIdTry().'">';
                                 echo'<tr class="fila">
                                         <td>'.$Intentos[$i]->getfecha().'</td>
                                         <td>'.$Intentos[$i]->getIdExamen().'</td>
+                                        <td>'.$Intentos[$i]->getCalificacion().'/10'.'</td>
                                         <td><input type="button" value="VISUALIZAR"></td>
                                     </tr>';
                             }

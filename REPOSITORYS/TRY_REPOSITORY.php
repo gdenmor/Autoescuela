@@ -25,7 +25,8 @@
                 $JSONRespuestas=$tuplas->JSONRespuestas;
                 $fechaRealizado=$tuplas->fecha;
                 $idExamen=$tuplas->idExamen;
-                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen);
+                $calificacion=$tuplas->calificacion;
+                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen,$calificacion);
                 $array[$i]=$Intento;
                 $i++;
             }
@@ -46,8 +47,9 @@
             $fechaRealizado=$objetoActualizado->getfecha();
             $JSONRespuestas=$objetoActualizado->getJsonFileRespuestas();
             $idExamen=$objetoActualizado->getExamen()->getId();
+            $calificacion=$objetoActualizado->calificacion;
 
-            $resultado=$conexion->exec("UPDATE INTENTO set id=upper('$idUser'), fecha='$fechaRealizado', JSONRespuestas='upper($JSONRespuestas'), idExamen='$idExamen' where idIntento= '$id'");
+            $resultado=$conexion->exec("UPDATE INTENTO set id=upper('$idUser'), fecha='$fechaRealizado', JSONRespuestas='upper($JSONRespuestas'), idExamen='$idExamen',calificacion='$calificacion' where idIntento= '$id'");
         }
 
         public static function Insert($objeto){
@@ -55,10 +57,11 @@
 
             $idUser=(int)$objeto->idUser;
             $fechaRealizado=$objeto->fecha;
-            $JSONRespuestas=$objeto->JSON;
+            $JSONRespuestas=json_encode($objeto->JSON);
             $idExamen=$objeto->idExamen;
+            $calificacion=$objeto->calificacion;
 
-            $resultado=$conexion->exec("INSERT INTO INTENTO (id, fecha, JSONRespuestas,idExamen) values ('$idUser','$fechaRealizado','$JSONRespuestas','$idExamen')");
+            $resultado=$conexion->exec("INSERT INTO INTENTO (id, fecha, JSONRespuestas,idExamen,calificacion) values ('$idUser','$fechaRealizado','$JSONRespuestas','$idExamen','$calificacion')");
         }
 
         public static function FindBy($idIntento) {
@@ -81,7 +84,8 @@
                     $JSONRespuestas=$tuplas->JSONRespuestas;
                     $fechaRealizado=$tuplas->fecha;
                     $idExamen=$tuplas->idExamen;
-                    $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen);
+                    $calificacion=$tuplas->calificacion;
+                    $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen,$calificacion);
             }
             return $Intento;
         }
@@ -104,7 +108,8 @@
                 $JSONRespuestas=$tuplas->JSONRespuestas;
                 $fechaRealizado=$tuplas->fecha;
                 $idExamen=$tuplas->idExamen;
-                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen);
+                $calificacion=$tuplas->calificacion;
+                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen, $calificacion);
                 $array[$i]=$Intento;
                 $i++;
             }
@@ -130,7 +135,8 @@
                 $JSONRespuestas=$tuplas->JSONRespuestas;
                 $fechaRealizado=$tuplas->fecha;
                 $idExamen=$tuplas->idExamen;
-                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen);
+                $calificacion=$tuplas->calificacion;
+                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen, $calificacion);
                 $array[$i]=$Intento;
                 $i++;
             }
