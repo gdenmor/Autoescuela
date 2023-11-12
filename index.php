@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../Autoescuela/CSS/forgot_password.css">
     <link rel="stylesheet" href="../Autoescuela/CSS/alumn_rol.css">
     <script src="../Autoescuela/JS/ROL_ALUMN.js"></script>
+    <script src="../Autoescuela/JS/VISUALIZACION.js"></script>
 </head>
 <body>
     <?php

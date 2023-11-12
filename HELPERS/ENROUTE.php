@@ -32,6 +32,14 @@ if (isset($_GET['menu'])) {
         require_once "../Autoescuela/FORMS/EXAMEN.php";
     }
 
+    if ($_GET['menu']=="visualizacion"){
+        require_once "../Autoescuela/FORMS/VISUALIZA_EXAMEN.php";
+    }
+
+    if ($_GET['menu']=="practica"){
+        require_once "../Autoescuela/FORMS/PRACTICAEXAMEN.php";
+    }
+
 
 }
 

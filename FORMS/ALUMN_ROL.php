@@ -22,13 +22,13 @@
                     <a><input type="button" class="boton-alumno" value="GENERAR EXAMENES"></input></a>
                     <div class="elementos_desplegable-alumno">
                         <div class="elementos-alumno">
-                            <a><b>FÁCIL</b></a>
+                            <a class="dificultad"><b>FÁCIL</b></a>
                         </div>
                         <div class="elementos-alumno">
-                            <a><b>MEDIO</b></a>
+                            <a class="dificultad"><b>MEDIO</b></a>
                         </div>
                         <div class="elementos-alumno">
-                            <a><b>DIFÍCIL</b></a>
+                            <a class="dificultad"><b>DIFÍCIL</b></a>
                         </div>
                     </div>
                 </div>

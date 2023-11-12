@@ -170,13 +170,10 @@ window.addEventListener("load",function(){
                     inputs[i].addEventListener("change",function(){
                         if (inputs[i].checked==true){
                             if (i==0){
-                                alert("1");
                                 respuestasJSON[i]=1;
                             }else if (i==1){
-                                alert("2");
                                 respuestasJSON[i]=2;
                             }else if (i==2){
-                                alert("3");
                                 respuestasJSON[i]=3;
                             }else{
                                 respuestasJSON[i]=0;
