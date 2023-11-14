@@ -71,5 +71,25 @@
             return $Categoria;
         }
 
+        public static function IDCategoria($nombre){
+            $conexion = CONEXION::AbreConexion();
+            $resultado = $conexion->prepare("SELECT * FROM CATEGORIA WHERE nombre=:nombre");
+            $resultado->bindParam(':nombre', $nombre, PDO::PARAM_INT);
+            $resultado->execute();
+        
+            $Categoria = null;
+        
+            if ($resultado) {
+                $tupla = $resultado->fetch(PDO::FETCH_OBJ);
+        
+                if ($tupla) {
+                    $idCategoria=$tupla->idCategoria;
+                    $Categoria=new CATEGORIA($idCategoria,$nombre);
+                }
+            }
+
+            return $Categoria;
+        }
+
     }
 ?>

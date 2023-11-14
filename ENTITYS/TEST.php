@@ -1,10 +1,10 @@
 <?php
     class TEST{
-        public $id;
-        public $fechahora;
-        public $Intento=[];
-        public $User=[];
-        public $Preguntas=[];
+        private $id;
+        private $fechahora;
+        private $Intento=[];
+        private $User=[];
+        private $Preguntas=[];
 
         public function __construct($id, $fechahora, $Intento, $User, $Preguntas){
             $this->id = $id;

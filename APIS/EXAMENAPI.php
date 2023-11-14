@@ -6,8 +6,9 @@
         $id = $_GET['id'];
         if ($id != '') {
             $Examen = TEST_REPOSITORY::FindBy($id);
-    
-            $Ex = new stdClass();
+
+            if ($Examen!=null) {
+                $Ex = new stdClass();
             $Ex->id = $id;
     
             $Preguntas = $Examen->getPreguntas();
@@ -41,6 +42,7 @@
         }
     
         $Ex->preguntas = $Preguntass;
+            }
     
         echo json_encode(["Examen" => $Ex]);
 

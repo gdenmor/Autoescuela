@@ -37,11 +37,11 @@
                     <div class="elementos_desplegable-alumno">
                         <?php 
                         $user=SESSION::leer_session('USER');
-                        $ExamenesUsuario=TEST_REPOSITORY::ExamenesUsuario($user->id);
+                        $ExamenesUsuario=TEST_REPOSITORY::ExamenesUsuario($user->getId());
                         for ($i= 0; $i < count($ExamenesUsuario); $i++) {
                             echo
                                 '<div class="elementos-alumno">
-                                    <a class="Examenes"><b>'."Examen"." ".$ExamenesUsuario[$i]->id.'</b></a>
+                                    <a class="Examenes"><b>'."Examen"." ".$ExamenesUsuario[$i]->getExamen()->getIds().'</b></a>
                                 </div>';
                         }
                         ?>
@@ -60,10 +60,10 @@
         echo '  <div id="padre-alumno">
                     <div>
                         <div id="rol">'
-                            .$user->rol.'
+                            .$user->getRol().'
                         </div> 
                         <div>'
-                            .$user->username.'
+                            .$user->getUsername().'
                             <br> 
                             <b>AUTOESCUELA PROYECTO</b>
                             <input id="idUser" type="hidden" value="'.$user->getId().'">
@@ -87,7 +87,7 @@
                 <tbody>
                     <?php
                        $user=SESSION::leer_session('USER');
-                       $Intentos=TRY_REPOSITORY::IntentosdeUnUsuario($user->id);
+                       $Intentos=TRY_REPOSITORY::IntentosdeUnUsuario($user->getId());
                        if ($Intentos==null){
 
                        }else{

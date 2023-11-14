@@ -1,10 +1,10 @@
 <?php
-    class USER{
-        public $id;
-        public $username;
-        public $password;
-        public $rol;
-        public $validado;
+    class USER implements \JsonSerializable{
+        private $id;
+        private $username;
+        private $password;
+        private $rol;
+        private $validado;
 
         
 
@@ -16,7 +16,13 @@
             $this->validado = $validado;
         }
 
-    
+        public function getvalidado(){
+            return $this->validado;
+        }
+
+        public function setvalidado($validado) {
+            $this->validado = $validado;
+        }
 
         public function getId(){
             return $this->id;
@@ -52,6 +58,15 @@
 
         public function setRol($rol){
             $this->rol = $rol;
+        }
+
+        public function toJSON(){
+            return json_encode(get_object_vars($this));
+        }
+
+        public function jsonSerialize(){
+            $var=get_object_vars($this);
+            return $var;
         }
         
     }

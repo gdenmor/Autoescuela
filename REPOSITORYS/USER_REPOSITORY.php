@@ -151,5 +151,38 @@
 
             return $Users;
         }
+
+        public static function alumnos(){
+            $conexion=CONEXION::AbreConexion();
+            $resultado=$conexion->prepare("SELECT * from USUARIO where rol='ALUMNO'");
+            $resultado->execute();
+
+            $id=null;
+
+            $array=null;
+
+            $i=0;
+
+            $usuario=null;
+            $contrasena=null;
+            $rol=null;
+
+
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                $id=$tuplas->id;
+                $usuario=$tuplas->nombre;
+                $contrasena=$tuplas->contraseña;
+                $rol=$tuplas->rol;
+                $validado=$tuplas->validado;
+                $User=new USER($id,$usuario,$contrasena,$rol,$validado);
+                $array[$i]=$User;
+                $i++;
+            }
+
+            
+
+            return $array;
+
+        }
     }
 ?>

@@ -5,28 +5,31 @@
     if ($_SERVER["REQUEST_METHOD"]=="GET"){
         $id=$_GET["id"];
         $Intento=TRY_REPOSITORY::FindBy($id);
-        $Int= new stdClass();
-        $Int->id=$id;
+        if ($Intento!=null){
+            $Int= new stdClass();
+            $Int->id=$id;
 
-        $Usuario=$Intento->getUser();
+            $Usuario=$Intento->getUser();
 
-        $User=new stdClass();
-        $User->id=$Usuario->getId();
-        $User->nombre=$Usuario->getUsername();
-        $User->password=$Usuario->getPassword();
-        $User->rol=$Usuario->getRol();
+            $User=new stdClass();
+            $User->id=$Usuario->getId();
+            $User->nombre=$Usuario->getUsername();
+            $User->password=$Usuario->getPassword();
+            $User->rol=$Usuario->getRol();
 
-        $Userss=new stdClass();
-        $Userss->usuarios=$User;
+            $Userss=new stdClass();
+            $Userss->usuarios=$User;
 
-        $Int->usuarios=$Userss;
-        $JSONRespuestas=$Intento->getJsonFileRespuestas();
-        $JSON=new stdClass();
-        $JSON->jsonrespuestas=$JSONRespuestas;
-        $Int->JSONrespuestas=$JSON;
-        $Int->fechaRealizado=$Intento->getfecha();
+            $Int->usuarios=$Userss;
+            $JSONRespuestas=$Intento->getJsonFileRespuestas();
+            $JSON=new stdClass();
+            $JSON->jsonrespuestas=$JSONRespuestas;
+            $Int->JSONrespuestas=$JSON;
+            $Int->fechaRealizado=$Intento->getfecha();
 
-        $Int->idExamen=$Intento->getIdExamen();
+            $Int->idExamen=$Intento->getIdExamen();
+        }
+        
 
 
 
@@ -59,7 +62,7 @@
         $respuestas=json_decode($intento->JSON);
         $preguntas=PREGUNTA_REPOSITORY::PreguntasdeUnExamen($intento->idExamen);
         for ($i=0;$i<count($preguntas);$i++){
-            if ($preguntas[$i]->correcta==$respuestas[$i]){
+            if ($preguntas[$i]->getcorrecta()==$respuestas[$i]){
                 $calificacion=$calificacion+1;
             }
         }

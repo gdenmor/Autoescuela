@@ -1,15 +1,15 @@
 <?php
     class PREGUNTA{
-        public $id;
-        public $Categoria;
-        public $Dificultad;
-        public $Enunciado;
-        public $rep1;
-        public $rep2;
-        public $rep3;
-        public $correcta;
-        public $url;
-        public $tipo;
+        private $id;
+        private $Categoria;
+        private $Dificultad;
+        private $Enunciado;
+        private $rep1;
+        private $rep2;
+        private $rep3;
+        private $correcta;
+        private $url;
+        private $tipo;
 
         public function getId(){
             return $this->id;

@@ -13,7 +13,6 @@ window.addEventListener("load",function(){
     }
 
     const tabla=this.document.getElementsByClassName("fila");
-    this.alert(tabla);
 
     for (let i=0;i<tabla.length;i++){
         var fila=tabla[i].getElementsByTagName("td");

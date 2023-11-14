@@ -20,7 +20,7 @@
                     if (is_array($Usuarios) &&count($Usuarios)> 0) {
 
                         for ($i = 0; $i < count($Usuarios); $i++) {
-                            if (strtoupper(str_replace(" ","",$Usuarios[$i]->username)) == $usuario && strtoupper(str_replace(" ","",$Usuarios[$i]->password))) {
+                            if (strtoupper(str_replace(" ","",$Usuarios[$i]->getUsername())) == $usuario && strtoupper(str_replace(" ","",$Usuarios[$i]->getPassword()))) {
                                 $User = $Usuarios[$i];
                                 $existe = true;
                                 $i=999;
@@ -28,17 +28,17 @@
                         }
     
                         if ($existe) {
-                            if ($User->rol !== "") {
-                                if ($User->rol == "ALUMNO" && $User->validado==1) {
+                            if ($User->getRol() !== "") {
+                                if ($User->getRol() == "ALUMNO" && $User->getvalidado()==1) {
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=alumno");
-                                } else if ($User->rol == "PROFESOR" && $User->validado== 1) {
+                                } else if ($User->getRol() == "PROFESOR" && $User->getvalidado()== 1) {
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=profesor");
-                                }else if ($User->rol == "ADMINISTRADOR" && $User->validado==1) {
+                                }else if ($User->getRol() == "ADMINISTRADOR" && $User->getvalidado()==1) {
                                     SESSION::iniciaSesion("USER", $User, "http://localhost/AUTOESCUELA/index.php?menu=admin");
                                 }else{
                                     $mensajeError="No está validado";
                                 }
-                            } else if ($User->rol==null){
+                            } else if ($User->getRol()==null){
                                 $mensajeError = "El usuario está a la espera de ser aprobado";
                             }
                         } else {
@@ -57,7 +57,7 @@
                     if (is_array($Usuarios) && count($Usuarios) > 0) {
                         
                         for ($i = 0; $i < count($Usuarios); $i++) {
-                            if (strtoupper(str_replace(" ","",$Usuarios[$i]->username)) == $usuario && strtoupper(str_replace(" ","",$Usuarios[$i]->password))) {
+                            if (strtoupper(str_replace(" ","",$Usuarios[$i]->getUsername())) == $usuario && strtoupper(str_replace(" ","",$Usuarios[$i]->getPassword()))) {
                                 $existe = true;
                             }
                         }

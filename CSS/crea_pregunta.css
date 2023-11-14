@@ -1,0 +1,17 @@
+#imagenpregunta{
+    margin-top: 5%;
+}
+#enunciadopregunta{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+#contenedor-crea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+}
+
+#botoncrear{
+    margin-top: 5%;
+}

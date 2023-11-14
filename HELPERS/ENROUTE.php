@@ -40,6 +40,18 @@ if (isset($_GET['menu'])) {
         require_once "../Autoescuela/FORMS/PRACTICAEXAMEN.php";
     }
 
+    if ($_GET['menu']=="preguntas"){
+        require_once "../Autoescuela/FORMS/CREA_PREGUNTAS.php";
+    }
+
+    if ($_GET['menu']=="creaexamen"){
+        require_once "../Autoescuela/FORMS/CREAR_EXAMEN.php";
+    }
+
+    if ($_GET['menu']=="pila"){
+        require_once "../Autoescuela/FORMS/CREA_EXAMEN_CON_PILA.php";
+    }
+
 
 }
 

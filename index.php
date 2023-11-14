@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="../Autoescuela/CSS/alumn_rol.css">
     <script src="../Autoescuela/JS/ROL_ALUMN.js"></script>
     <script src="../Autoescuela/JS/VISUALIZACION.js"></script>
+    <link rel="stylesheet" href="CSS/teacher_rol.css">
+    <link rel="stylesheet" href="CSS/crea_pregunta.css">
+    <link rel="stylesheet" href="CSS/crea_examen.css">
+    <script src="../Autoescuela/JS/EXAMEN_PILA.js"></script>
+    <script src="../Autoescuela/JS/ROL_TEACHER.js"></script>
 </head>
 <body>
     <?php

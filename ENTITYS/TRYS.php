@@ -1,11 +1,11 @@
 <?php
     class TRYS{
-        public $idTry;
-        public $User;
-        public $fecha;
-        public $JSONrespuestas;
-        public $idExamen;
-        public $calificacion;
+        private $idTry;
+        private $User;
+        private $fecha;
+        private $JSONrespuestas;
+        private $idExamen;
+        private $calificacion;
 
         public function __construct($idTry, $User, $fecha,$JSONrespuestas,$idExamen,$calificacion){
             $this->idTry = $idTry;

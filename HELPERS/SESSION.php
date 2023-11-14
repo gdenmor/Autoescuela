@@ -10,7 +10,7 @@
     
         public static function Cerrar_Sesion() {
             session_destroy();
-            header("Location: http://localhost/AUTOESCUELA/index.php?menu=inicio");
+            header("Location: ?menu=inicio");
         }
     
         public static function iniciaSesion($clave,$valor,$redireccion){

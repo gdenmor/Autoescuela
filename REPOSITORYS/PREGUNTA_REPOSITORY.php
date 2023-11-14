@@ -21,7 +21,7 @@
                 $idPregunta=$tuplas->idPregunta;
                 $idCategoria=$tuplas->idcategoria;
                 $Categoria=CATEGORIA_REPOSITORY::FindBy($idCategoria);
-                $idDificultad=$tuplas->idDificultad;
+                $idDificultad=$tuplas->iddificultad;
                 $Dificultad=DIFICULTAD_REPOSITORY::FindBy($idDificultad);
                 $enunciado=$tuplas->enunciado;
                 $rep1=$tuplas->rep1;

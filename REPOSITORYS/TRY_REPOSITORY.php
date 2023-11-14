@@ -47,7 +47,7 @@
             $fechaRealizado=$objetoActualizado->getfecha();
             $JSONRespuestas=$objetoActualizado->getJsonFileRespuestas();
             $idExamen=$objetoActualizado->getExamen()->getId();
-            $calificacion=$objetoActualizado->calificacion;
+            $calificacion=$objetoActualizado->getCalificacion();
 
             $resultado=$conexion->exec("UPDATE INTENTO set id=upper('$idUser'), fecha='$fechaRealizado', JSONRespuestas='upper($JSONRespuestas'), idExamen='$idExamen',calificacion='$calificacion' where idIntento= '$id'");
         }
@@ -121,6 +121,32 @@
             $conexion = CONEXION::AbreConexion();
             $resultado = $conexion->prepare("SELECT * FROM INTENTO WHERE id= :idUsuario");
             $resultado->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
+            $resultado->execute();
+        
+            $User = null;
+            $array=null;
+
+            $i=0;
+        
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                $idIntento=$tuplas->idIntento;
+                $idUser=$tuplas->id;
+                $User=USER_REPOSITORY::FindBy($idUser);
+                $JSONRespuestas=$tuplas->JSONRespuestas;
+                $fechaRealizado=$tuplas->fecha;
+                $idExamen=$tuplas->idExamen;
+                $calificacion=$tuplas->calificacion;
+                $Intento=new TRYS($idIntento,$User,$fechaRealizado,$JSONRespuestas,$idExamen, $calificacion);
+                $array[$i]=$Intento;
+                $i++;
+            }
+        
+            return $array;
+        }
+
+        public static function IntentosAlumno() {
+            $conexion = CONEXION::AbreConexion();
+            $resultado = $conexion->prepare('SELECT i.idIntento,u.id,i.JSONRespuestas,i.fecha,i.idExamen,i.calificacion from INTENTO i inner join USUARIO u on i.id=u.id where u.rol="ALUMNO"');
             $resultado->execute();
         
             $User = null;

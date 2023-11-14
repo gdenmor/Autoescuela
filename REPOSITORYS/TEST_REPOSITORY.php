@@ -42,10 +42,9 @@
         public static function Insert($objeto){
             $conexion=CONEXION::AbreConexion();
 
-            $fechahora=$objeto->getFechahora();
-            $idUser=$objeto->getUser()->getId();
+            $fechahora=$objeto->fecha;
 
-            $resultado=$conexion->exec("INSERT INTO EXAMEN (idUser, fechahora) values ('$idUser','$fechahora')");
+            $resultado=$conexion->exec("INSERT INTO EXAMEN (fechahora) values ('$fechahora')");
         }
 
         public static function FindBy($idExamen) {
@@ -104,7 +103,7 @@
             return $array;
         }
 
-        public static function ExamenesUsuario($idUser){
+        /*public static function ExamenesUsuario($idUser){
             $conexion=CONEXION::AbreConexion();
 
             $resultado=$conexion->prepare("SELECT * from EXAMEN
@@ -133,6 +132,44 @@
 
             return $array;
 
+        }*/
+
+        public static function ExamenesUsuario($idUser){
+            $conexion=CONEXION::AbreConexion();
+
+            $resultado=$conexion->prepare("SELECT * from examen_user
+                                        where user_id=:user_id
+                                        ");
+            $resultado->bindParam(':user_id', $idUser, PDO::PARAM_INT);
+            $resultado->execute();
+
+            $i=0;
+            $array=null;
+
+
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                $id=$tuplas->examen_id;
+                $idUser=$tuplas->user_id;
+                $Examen=TEST_REPOSITORY::FindBy($id);
+                $User=USER_REPOSITORY::FindBy($idUser);
+                $Examen_User=new ExamenUser($Examen,$User);
+                $array[$i]=$Examen_User;
+                $i++;
+            }
+
+            
+
+            return $array;
         }
+
+        public static function insertExamen_pregunta($idexamen,$idpregunta){
+            $conexion=CONEXION::AbreConexion();
+
+
+            $resultado=$conexion->exec("INSERT INTO examen_pregunta values ($idexamen,$idpregunta)");
+        }
+
+
+
     }
 ?>

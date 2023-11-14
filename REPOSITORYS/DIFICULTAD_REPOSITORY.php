@@ -19,8 +19,8 @@
             while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
                 $idDificultad=$tuplas->idDificultad;
                 $nombre=$tuplas->nombre;
-                $Categoria=new DIFICULTAD($idDificultad,$nombre);
-                $array[$i]=$Categoria;
+                $Dificultad=new DIFICULTAD($idDificultad,$nombre);
+                $array[$i]=$Dificultad;
                 $i++;
             }
 
@@ -68,6 +68,26 @@
             }
         
             return $Categoria;
+        }
+
+        public static function IDDificultad($nombre){
+            $conexion = CONEXION::AbreConexion();
+            $resultado = $conexion->prepare("SELECT * FROM DIFICULTAD WHERE nombre=:nombre");
+            $resultado->bindParam(':nombre', $nombre, PDO::PARAM_INT);
+            $resultado->execute();
+        
+            $Dificultad = null;
+        
+            if ($resultado) {
+                $tupla = $resultado->fetch(PDO::FETCH_OBJ);
+        
+                if ($tupla) {
+                    $idDificultad=$tupla->idDificultad;
+                    $Dificultad=new DIFICULTAD($idDificultad,$nombre);
+                }
+            }
+
+            return $Dificultad;
         }
 
     }

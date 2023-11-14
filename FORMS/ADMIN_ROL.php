@@ -1,5 +1,9 @@
 <?php
     SESSION::CreaSesion();
+    $User = SESSION::leer_session("USER");
+    if ($User==null){
+        SESSION::Cerrar_Sesion();
+    }
     
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
         $logout=isset($_POST["logout"]) ? $_POST["logout"] :"";
