@@ -21,7 +21,7 @@
             if (move_uploaded_file($temporal, $rutaCompleta)) {
             
             }else{
-                echo "Error";
+                $rutaCompleta="";
             }
             $tipo=$archivo['type'];
         }
@@ -56,10 +56,12 @@
             <select name="categoria">
                 <?php
                     $categorias=CATEGORIA_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($categorias); $i++) {
-                        echo '<option value="'.$categorias[$i]->getNombre().'">'.$categorias[$i]->getNombre().'</option>';
+                    if ($categorias!=null) {
+                        for ($i= 0; $i < count($categorias); $i++) {
+                            echo '<option value="'.$categorias[$i]->getNombre().'">'.$categorias[$i]->getNombre().'</option>';
+                        }
+    
                     }
-
 
                 ?>
             </select>
@@ -68,8 +70,10 @@
             <select name="dificultad">
                 <?php
                     $Dificultad=DIFICULTAD_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($Dificultad); $i++) {
-                        echo "<option>".$Dificultad[$i]->getNom()."</option>";
+                    if ($Dificultad!=null){
+                        for ($i= 0; $i < count($Dificultad); $i++) {
+                            echo "<option>".$Dificultad[$i]->getNom()."</option>";
+                        }
                     }
 
 

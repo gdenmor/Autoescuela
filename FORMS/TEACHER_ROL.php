@@ -1,8 +1,12 @@
 <?php
     SESSION::CreaSesion();
-    $User = SESSION::leer_session("USER");
-    if ($User==null){
+    if (SESSION::estaLogueado('USER')==false){
         SESSION::Cerrar_Sesion();
+    }else{
+        $usuario=SESSION::leer_session('USER');
+        if ($usuario->getRol()!="PROFESOR"){
+            SESSION::Cerrar_Sesion();
+        }
     }
 
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -32,27 +36,6 @@
 
     ?>
     <div id="container-profesor">
-        <div id="menu-profesor">
-            <nav id="nav-profesor">
-                <div class="elementos-profesor" id="profesor">
-                    <img src="IMAGES/LOGO.png">
-                </div>
-                <div class="elementos-profesor">
-                    <a id="link1"><input type="button" class="boton-profesor" value="GENERAR EXAMENES CON PILA DE PREGUNTAS"></input></a>
-                </div>
-                <div class="elementos-profesor">
-                    <a href="http://localhost/AUTOESCUELA/index.php?menu=preguntas"><input type="button" class="boton-profesor" value="CREAR PREGUNTAS"></input></a>
-                </div>
-                <div id="elementos-profesor">
-                    <a href="http://localhost/AUTOESCUELA/index.php?menu=creaexamen"><input type="button" name="logout" class="boton-alumno" value="GENERAR EXAMENES SIN PILA DE PREGUNTAS"></input></a>
-                </div>
-            <form method="post">
-                <div id="elementos-alumno">
-                    <a><input name="logout" type="button" name="logout" class="boton-alumno" value="CERRAR SESIÓN"></input></a>
-                </div>
-            </form>
-            </nav>
-        </div>
         <div id="historico">
             <table id="tabla-profesor"border="1">
                 <thead>

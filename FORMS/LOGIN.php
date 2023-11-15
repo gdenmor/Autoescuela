@@ -1,5 +1,6 @@
 <?php
     AUTOLOAD::AutoLoad();
+        
 
             $mensajeError = "";
 
@@ -67,7 +68,7 @@
                         } else {
                             if ((strlen($usuario)>0&&strlen($usuario)<=45)&&(strlen($password)>0&&strlen($password)<=45)){
                                 $User = new USER($id,$usuario, $password, null,0);
-                                USER_REPOSITORY::Insert($User);
+                                USER_REPOSITORY::InsertRegistro($User);
                             }else{
                                 $mensajeError="Debe de tener entre 1 y 45 caracteres tanto el usuario como la contraseña";
                             }
@@ -75,7 +76,7 @@
                     }else{
                         if ((strlen($usuario)>0&&strlen($usuario)<=45)&&(strlen($password)>0&&strlen($password)<=45)){
                             $User = new USER($id,$usuario, $password, null,0);
-                            USER_REPOSITORY::Insert($User);
+                            USER_REPOSITORY::InsertRegistro($User);
                         }else{
                             $mensajeError="Debe de tener entre 1 y 45 caracteres tanto el usuario como la contraseña";
                         }
@@ -109,7 +110,7 @@
                 <article id="lblContrasena">
                     <label><b> Contraseña: </b></label>
                 </article>
-                <article>
+                <article id="password">
                     <input type="password" name="password" size="45">
                 </article>
             </section>

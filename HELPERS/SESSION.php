@@ -18,9 +18,15 @@
             $_SESSION[$clave]=$valor;
             header("Location: $redireccion");
         }
+
+        public static function estaLogueado($clave) {
+            return isset($_SESSION[$clave]) === true;
+        }
     
         public static function CreaSesion(){
-            session_start();
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            }
         }
 
     }

@@ -23,7 +23,7 @@ window.addEventListener("load",function(ev){
 
             for (let i=0;i<preguntas.length;i++){
                 var div=document.createElement("div");
-                div.innerHTML=i;
+                div.innerHTML=i+1;
                 div.classList.add("divs");
                 div.style.border="apx solid black";
                 divcont.appendChild(div);
@@ -81,7 +81,7 @@ window.addEventListener("load",function(ev){
                     if (dudosa[i].checked==true){
                         divselementos[i].style.backgroundColor="yellow";
                     }else{
-                        divselementos[i].style.backgroundColor="white";
+                        divselementos[i].style.backgroundColor="#83C2CF";
                     }
                 })
             }

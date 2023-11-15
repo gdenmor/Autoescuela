@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             for ($i = 0; $i < count($users); $i++) {
                 if ($users[$i]->getUsername() == $usuario) {
                     $existe = true;
-                    $user = new User($users[$i]->getId(), $users[$i]->getUsername(), $users[$i]->getPassword(), $users[$i]->getRol(),$users[$i]->validado);
+                    $user = new User($users[$i]->getId(), $users[$i]->getUsername(), $users[$i]->getPassword(), $users[$i]->getRol(),$users[$i]->getvalidado());
                 }
             }
 
@@ -47,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
-<div id="html">
     <div id="container-forgot">
         <div id="enlace-forgot">
             <h2 id="letralink-forgot"><u>¿Has olvidado tú contraseña?</u></h2>
@@ -81,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="submit" value="CAMBIAR CONTRASEÑA">
             </div>
         </form>
-        <div>
+        <div id="error">
             <?php
             if (isset($mensajeError) && $mensajeError !== "") {
                 echo $mensajeError;
@@ -90,4 +89,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ?>
         </div>
     </div>
-</div>
+

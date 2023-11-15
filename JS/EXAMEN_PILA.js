@@ -1,21 +1,23 @@
 window.addEventListener("load",function(){
     const preguntas=[];
     const filas=this.document.querySelectorAll("#tablapreg tr");
+    const array=Array.from(filas).slice(1);
     var params=new URLSearchParams(this.window.location.search);
     var idUser=params.get("idUser");
     var fecha=new Date();
     var string=fecha.getFullYear()+"-"+fecha.getMonth()+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
-    const id=this.document.getElementsByClassName("ids");
+    const ids=this.document.getElementsByClassName("ids");
     const idus=this.document.getElementsByClassName("idus");
     var examen={};
-    for (let i=1;i<filas.length;i++){
-        const datos=filas[i].getElementsByTagName("td");
+    for (let i=0;i<array.length;i++){
+        const datos=array[i].getElementsByTagName("td");
         var pregunta;
         for (let j=0;j<datos.length;j++){
             if (j==11){
                 const input=datos[j].firstElementChild;
                 console.log(input);
                 input.addEventListener("change",function(){
+                    var indice=i;
                     if (input.checked==true){
                         pregunta={
                             enunciado: datos[0].textContent,
@@ -33,7 +35,7 @@ window.addEventListener("load",function(){
                             },
                             url: datos[9].textContent,
                             tipo: datos[10].textContent,
-                            id: id[i].value
+                            id: ids[indice].value
                         }
                         preguntas.push(pregunta);
                     }
@@ -43,19 +45,22 @@ window.addEventListener("load",function(){
         }
     }
 
-    const filasus=this.document.querySelectorAll("#tablaus tr")
+    const filasus=this.document.querySelectorAll("#tablaus tr");
+    const filasuss=Array.from(filasus).slice(1);
     const users=[];
-    for (let i=1;i<filasus.length;i++){
-        const datosi=filasus[i].getElementsByTagName("td");
+    for (let i=0;i<filasuss.length;i++){
+        debugger;
+        const datosi=filasuss[i].getElementsByTagName("td");
         var pregunta;
         for (let j=0;j<datosi.length;j++){
             if (j==1){
                 const input=datosi[j].firstElementChild;
-                console.log(input);
                 input.addEventListener("change",function(){
+                    debugger;
+                    var indice=i;
                     if (input.checked==true){
                         usuario={
-                            id: idus[i].value,
+                            id: idus[indice].value,
                             username: datosi[0].textContent
                         }
 
@@ -75,6 +80,7 @@ window.addEventListener("load",function(){
             fecha: string,
             preguntass: preguntas
         }
+
         fetch("../Autoescuela/APIS/PREGUNTA_EXAMENAPI.php",{
             method: "POST",
             headers:{

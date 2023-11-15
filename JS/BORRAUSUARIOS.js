@@ -23,10 +23,7 @@ window.addEventListener("load",function(){
                     var rolSeleccionado = rol.options[rol.selectedIndex].value;
 
                     var userData = {
-                        id: id,
-                        username: usuario,
-                        password: contrasena,
-                        rol: rolSeleccionado
+                        id: id
                     };
 
                     var id = userData.id.trim();

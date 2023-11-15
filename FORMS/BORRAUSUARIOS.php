@@ -43,18 +43,19 @@
             </thead>
             <tbody id="cuerpo">
                 <?php
-                    $Users=USER_REPOSITORY::FindAll();
+                    $Users=USER_REPOSITORY::FindAllnoAdmin();
+                    if ($Users!=null){
+                        for ($i=0;$i<count($Users);$i++) {
+                            $User=$Users[$i];
 
-                    for ($i=0;$i<count($Users);$i++) {
-                        $User=$Users[$i];
-
-                        echo'<tr>
-                                <td> '.$User->getId() . '</td>
-                                <td> ' .$User->getUsername(). '</td>
-                                <td>'. $User->getPassword(). '</td>
-                                <td>  <select> <option> ALUMNO </option> <option> PROFESOR </option> </td>
-                                <td><form method="post" class="user_form"><input id="aceptar" class="acepta" name="aceptar'.$i.'" type="submit" value="BORRAR"></form> </td>
-                            </tr>';
+                            echo'<tr>
+                                    <td> '.$User->getId() . '</td>
+                                    <td> ' .$User->getUsername(). '</td>
+                                    <td>'. $User->getPassword(). '</td>
+                                    <td>  <select> <option> ALUMNO </option> <option> PROFESOR </option> </td>
+                                    <td><form method="post" class="user_form"><input id="aceptar" class="acepta" name="aceptar'.$i.'" type="submit" value="BORRAR"></form> </td>
+                                </tr>';
+                        }
                     }
 
 

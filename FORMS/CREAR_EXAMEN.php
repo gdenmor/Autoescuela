@@ -1,19 +1,82 @@
 <?php
+    SESSION::CreaSesion();
+    $preguntas=[];
+
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        $Preguntas=[];
+        $siguiente=isset($_POST['siguiente'])?$_POST['siguiente']:"";
+
+        $finalizar=isset($_POST['finalizar'])?$_POST['finalizar']:"";
+
+
+        if($siguiente){
+        
+            $enunciado=$_POST['enunciado'];
+            $rep1=$_POST['rep1'];
+            $rep2=$_POST['rep2'];
+            $rep3=$_POST['rep3'];
+            $correcta=0;
+            if (isset($_POST["respuestas"])) {
+                $correcta = $_POST["respuestas"];
+            }
+
+            $archivo=$_FILES['archivo'];
+
+            $rutaCompleta = "";
+            $tipo="";
+
+            if ($archivo){
+                $nombre=$archivo['name'];
+                $temporal=$archivo['tmp_name'];
+                $rutaCompleta = "IMAGES/" . $nombre;
+                if (move_uploaded_file($temporal, $rutaCompleta)) {
+                
+                }else{
+                    $rutaCompleta="";
+                }
+                $tipo=$archivo['type'];
+            }
+
+            $categoria="";
+
+            if (isset($_POST["categoria"])) {
+                $categoria = $_POST["categoria"];
+            }
+
+            $dificultad="";
+            if (isset($_POST["dificultad"])) {
+                $dificultad = $_POST["dificultad"];
+            }
+
+            $Categoria=CATEGORIA_REPOSITORY::IDCategoria($categoria);
+            $Dificultad=DIFICULTAD_REPOSITORY::IDDificultad($dificultad);
+
+            $Pregunta=new PREGUNTA(0,$Categoria,$Dificultad,$enunciado,$rep1,$rep2,$rep3,$correcta,$rutaCompleta,$tipo);
+
+            $preguntas[]=$Pregunta;
+        }
+
+        if ($finalizar){
+            for ($i=0;$i<count($preguntas);$i++){
+                $pregunta=$preguntas[$i];
+                PREGUNTA_REPOSITORY::Insert($pregunta);
+                $idExamen=EXAMEN_PREGUNTA_REPOSITORY::verNumeroExamenes();
+                EXAMEN_PREGUNTA_REPOSITORY::insert($pregunta->getId(),$idExamen);
+            }
+        }
+
+        
 
     }
+    $_SESSION['preguntas']=$preguntas;
+
+
 ?>
 <div id="contenedor-crea">
-    <div>
-        <?php
-            
-        ?>
-    </div>
-<form>
-<div class="pregunta-examen-creada">
+
+<div id="pregunta-creada">
+    <form method="post" enctype="multipart/form-data">
         <div>
-            <select name="categoria-examen-pregunta1">
+            <select name="categoria">
                 <?php
                     $categorias=CATEGORIA_REPOSITORY::FindAll();
                     for ($i= 0; $i < count($categorias); $i++) {
@@ -25,7 +88,7 @@
             </select>
         </div>
         <div>
-            <select name="dificultad-examen-pregunta1">
+            <select name="dificultad">
                 <?php
                     $Dificultad=DIFICULTAD_REPOSITORY::FindAll();
                     for ($i= 0; $i < count($Dificultad); $i++) {
@@ -36,238 +99,28 @@
                 ?>
             </select>
         </div>
-        <div id="imagenpreguntaexamen1">
+        <div id="imagenpregunta">
             <input type="file" name="archivo" id="imagenpreguntas">
         </div>
-        <div id="enunciadopreguntaexamen1">
+        <div id="enunciadopregunta">
             <input type="text" name="enunciado" placeholder="Introduzca la pregunta" id="enunc">
         </div>
         <div>
-            <div class="respuesta1">
+            <div class="respuesta">
                 <input type="radio" name="respuestas" value="1"><input type="text" name="rep1" class="respuestass">
             </div>
-            <div class="respuesta1">
+            <div class="respuesta">
                 <input type="radio" name="respuestas" value="2"><input type="text" name="rep2" class="respuestass">
             </div>
-            <div class="respuesta1">
+            <div class="respuesta">
                 <input type="radio" name="respuestas" value="3"><input type="text" name="rep3" class="respuestass">
             </div>
         </div>
+        <div id="botoncrear">
+            <input type="submit" value="SIGUIENTE" id="boton" name="siguiente">
+            <input type="submit" value="CREAR EXAMEN" name="finalizar">
+        </div>
+    </form>
 </div>
-<div class="pregunta-examen-creada">
-        <div>
-            <select name="categoria-examen-pregunta2">
-                <?php
-                    $categorias=CATEGORIA_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($categorias); $i++) {
-                        echo '<option value="'.$categorias[$i]->getNombre().'">'.$categorias[$i]->getNombre().'</option>';
-                    }
 
-
-                ?>
-            </select>
-        </div>
-        <div>
-            <select name="dificultad-examen-pregunta2">
-                <?php
-                    $Dificultad=DIFICULTAD_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($Dificultad); $i++) {
-                        echo "<option>".$Dificultad[$i]->getNom()."</option>";
-                    }
-
-
-                ?>
-            </select>
-        </div>
-        <div id="imagenpreguntaexamen2">
-            <input type="file" name="archivo" id="imagenpreguntas">
-        </div>
-        <div id="enunciadopreguntaexamen2">
-            <input type="text" name="enunciado" placeholder="Introduzca la pregunta" id="enunc">
-        </div>
-        <div>
-            <div class="respuesta2">
-                <input type="radio" name="respuestas" value="1"><input type="text" name="rep1" class="respuestass">
-            </div>
-            <div class="respuesta2">
-                <input type="radio" name="respuestas" value="2"><input type="text" name="rep2" class="respuestass">
-            </div>
-            <div class="respuesta2">
-                <input type="radio" name="respuestas" value="3"><input type="text" name="rep3" class="respuestass">
-            </div>
-        </div>
-</div>
-<div class="pregunta-examen-creada">
-        <div>
-            <select name="categoria-examen-pregunta3">
-                <?php
-                    $categorias=CATEGORIA_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($categorias); $i++) {
-                        echo '<option value="'.$categorias[$i]->getNombre().'">'.$categorias[$i]->getNombre().'</option>';
-                    }
-
-
-                ?>
-            </select>
-        </div>
-        <div>
-            <select name="dificultad-examen-pregunta3">
-                <?php
-                    $Dificultad=DIFICULTAD_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($Dificultad); $i++) {
-                        echo "<option>".$Dificultad[$i]->getNom()."</option>";
-                    }
-
-
-                ?>
-            </select>
-        </div>
-        <div id="imagenpreguntaexamen3">
-            <input type="file" name="archivo" id="imagenpreguntas">
-        </div>
-        <div id="enunciadopreguntaexamen3">
-            <input type="text" name="enunciado" placeholder="Introduzca la pregunta" id="enunc">
-        </div>
-        <div>
-            <div class="respuesta3">
-                <input type="radio" name="respuestas" value="1"><input type="text" name="rep1" class="respuestass">
-            </div>
-            <div class="respuesta3">
-                <input type="radio" name="respuestas" value="2"><input type="text" name="rep2" class="respuestass">
-            </div>
-            <div class="respuesta3">
-                <input type="radio" name="respuestas" value="3"><input type="text" name="rep3" class="respuestass">
-            </div>
-        </div>
-</div>
-<div class="pregunta-examen-creada">
-        <div>
-            <select name="categoria-examen-pregunta4">
-                <?php
-                    $categorias=CATEGORIA_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($categorias); $i++) {
-                        echo '<option value="'.$categorias[$i]->getNombre().'">'.$categorias[$i]->getNombre().'</option>';
-                    }
-
-
-                ?>
-            </select>
-        </div>
-        <div>
-            <select name="dificultad-examen-pregunta4">
-                <?php
-                    $Dificultad=DIFICULTAD_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($Dificultad); $i++) {
-                        echo "<option>".$Dificultad[$i]->getNom()."</option>";
-                    }
-
-
-                ?>
-            </select>
-        </div>
-        <div id="imagenpreguntaexamen4">
-            <input type="file" name="archivo" id="imagenpreguntas">
-        </div>
-        <div id="enunciadopreguntaexamen4">
-            <input type="text" name="enunciado" placeholder="Introduzca la pregunta" id="enunc">
-        </div>
-        <div>
-            <div class="respuesta4">
-                <input type="radio" name="respuestas" value="1"><input type="text" name="rep1" class="respuestass">
-            </div>
-            <div class="respuesta4">
-                <input type="radio" name="respuestas" value="2"><input type="text" name="rep2" class="respuestass">
-            </div>
-            <div class="respuesta4">
-                <input type="radio" name="respuestas" value="3"><input type="text" name="rep3" class="respuestass">
-            </div>
-        </div>
-</div>
-<div class="pregunta-examen-creada">
-        <div>
-            <select name="categoria-examen-pregunta5">
-                <?php
-                    $categorias=CATEGORIA_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($categorias); $i++) {
-                        echo '<option value="'.$categorias[$i]->getNombre().'">'.$categorias[$i]->getNombre().'</option>';
-                    }
-
-
-                ?>
-            </select>
-        </div>
-        <div>
-            <select name="dificultad-examen-pregunta5">
-                <?php
-                    $Dificultad=DIFICULTAD_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($Dificultad); $i++) {
-                        echo "<option>".$Dificultad[$i]->getNom()."</option>";
-                    }
-
-
-                ?>
-            </select>
-        </div>
-        <div id="imagenpreguntaexamen5">
-            <input type="file" name="archivo" id="imagenpreguntas">
-        </div>
-        <div id="enunciadopreguntaexamen5">
-            <input type="text" name="enunciado" placeholder="Introduzca la pregunta" id="enunc">
-        </div>
-        <div>
-            <div class="respuesta5">
-                <input type="radio" name="respuestas" value="1"><input type="text" name="rep1" class="respuestass">
-            </div>
-            <div class="respuesta5">
-                <input type="radio" name="respuestas" value="2"><input type="text" name="rep2" class="respuestass">
-            </div>
-            <div class="respuesta5">
-                <input type="radio" name="respuestas" value="3"><input type="text" name="rep3" class="respuestass">
-            </div>
-        </div>
-</div>
-<div class="pregunta-examen-creada">
-        <div>
-            <select name="categoria-examen-pregunta6">
-                <?php
-                    $categorias=CATEGORIA_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($categorias); $i++) {
-                        echo '<option value="'.$categorias[$i]->getNombre().'">'.$categorias[$i]->getNombre().'</option>';
-                    }
-
-
-                ?>
-            </select>
-        </div>
-        <div>
-            <select name="dificultad-examen-pregunta6">
-                <?php
-                    $Dificultad=DIFICULTAD_REPOSITORY::FindAll();
-                    for ($i= 0; $i < count($Dificultad); $i++) {
-                        echo "<option>".$Dificultad[$i]->getNom()."</option>";
-                    }
-
-
-                ?>
-            </select>
-        </div>
-        <div id="imagenpreguntaexamen6">
-            <input type="file" name="archivo" id="imagenpreguntas">
-        </div>
-        <div id="enunciadopreguntaexamen6">
-            <input type="text" name="enunciado" placeholder="Introduzca la pregunta" id="enunc">
-        </div>
-        <div>
-            <div class="respuesta6">
-                <input type="radio" name="respuestas" value="1"><input type="text" name="rep1" class="respuestass">
-            </div>
-            <div class="respuesta6">
-                <input type="radio" name="respuestas" value="2"><input type="text" name="rep2" class="respuestass">
-            </div>
-            <div class="respuesta6">
-                <input type="radio" name="respuestas" value="3"><input type="text" name="rep3" class="respuestass">
-            </div>
-        </div>
-</div>
-</form>
 </div>

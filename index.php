@@ -27,6 +27,10 @@
 <body>
     <?php
         require_once "HELPERS/AUTOLOAD.php";
+        require_once "header.php";
+    ?>
+    <?php
+        require_once "HELPERS/AUTOLOAD.php";
         require_once "HELPERS/ENROUTE.php";
     ?>
 </body>

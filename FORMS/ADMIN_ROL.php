@@ -1,8 +1,12 @@
 <?php
     SESSION::CreaSesion();
-    $User = SESSION::leer_session("USER");
-    if ($User==null){
+    if (SESSION::estaLogueado('USER')==false){
         SESSION::Cerrar_Sesion();
+    }else{
+        $usuario=SESSION::leer_session('USER');
+        if ($usuario->getRol()!="ADMINISTRADOR"){
+            SESSION::Cerrar_Sesion();
+        }
     }
     
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
@@ -14,23 +18,6 @@
 
 
 ?>
-    <div id="admin">
-        <nav id="navegacion">
-            <div id="si">
-                <a href="http://localhost/AUTOESCUELA/index.php?menu=admin"><img src="../AUTOESCUELA/IMAGES/LOGO.png"></a>
-            </div>
-            <div class="BOTONES">
-                <a href="http://localhost/AUTOESCUELA/index.php?menu=crea"><input type="button" value="CREAR USUARIOS"></a>
-            </div>
-            <div class="BOTONES" id="borrar">
-                <a href="http://localhost/AUTOESCUELA/index.php?menu=borra"><input type="button" value="BORRAR USUARIOS"></a>
-            </div>
-            <form method="post">
-            <div id="CIERRA">
-                <input type="submit" value="CERRAR SESIÓN" name="logout">
-            </div>
-            </form>
-        </nav>
         <div id="divtabla">
         <table id="table" border="1">
             <thead>

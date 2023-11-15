@@ -28,6 +28,12 @@
             }
         }
 
+        public static function insert($idpregunta,$idexamen){
+            $conexion=CONEXION::AbreConexion();
+            $resultado=$conexion->exec("INSERT INTO EXAMEN_PREGUNTA (examen_id,pregunta_id) values ('$idexamen','$idpregunta')");
+            
+        }
+
         
     }
 ?>

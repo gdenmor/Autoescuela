@@ -6,5 +6,5 @@
     }
 ?>
 <div id="practica">
-
+    
 </div>

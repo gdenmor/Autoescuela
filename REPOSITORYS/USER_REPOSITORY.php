@@ -67,6 +67,38 @@
             return $array;
         }
 
+        public static function FindAllnoAdmin(){
+            $conexion=CONEXION::AbreConexion();
+            $resultado=$conexion->prepare("SELECT * from USUARIO where not rol='ADMINISTRADOR'");
+            $resultado->execute();
+
+            $id=null;
+
+            $array=null;
+
+            $i=0;
+
+            $usuario=null;
+            $contrasena=null;
+            $rol=null;
+
+
+            while ($tuplas=$resultado->fetch(PDO::FETCH_OBJ)) {
+                $id=$tuplas->id;
+                $usuario=$tuplas->nombre;
+                $contrasena=$tuplas->contraseña;
+                $rol=$tuplas->rol;
+                $validado=$tuplas->validado;
+                $User=new USER($id,$usuario,$contrasena,$rol,$validado);
+                $array[$i]=$User;
+                $i++;
+            }
+
+            
+
+            return $array;
+        }
+
         public static function DeleteById($id){
             $conexion=CONEXION::AbreConexion();
 
@@ -87,6 +119,16 @@
             $usuario=$objeto->username;
             $password=$objeto->password;
             $rol=$objeto->rol;
+
+            $resultado=$conexion->exec("INSERT INTO USUARIO (nombre, contraseña, rol) values (upper('$usuario'),upper('$password'),upper('$rol'))");
+        }
+
+        public static function InsertRegistro($objeto){
+            $conexion=CONEXION::AbreConexion();
+
+            $usuario=$objeto->getUsername();
+            $password=$objeto->getPassword();
+            $rol=$objeto->getRol();
 
             $resultado=$conexion->exec("INSERT INTO USUARIO (nombre, contraseña, rol) values (upper('$usuario'),upper('$password'),upper('$rol'))");
         }
@@ -119,7 +161,7 @@
 
         public static function FindRolNull(){
             $conexion=CONEXION::AbreConexion();
-            $resultado=$conexion->prepare("SELECT * from USUARIO where rol is null");
+            $resultado=$conexion->prepare("SELECT * from USUARIO where rol=''");
             $resultado->execute();
 
             $id=null;
