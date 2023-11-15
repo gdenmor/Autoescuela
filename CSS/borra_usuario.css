@@ -52,16 +52,3 @@
     align-items: center; /* Centrar horizontalmente */
     justify-content: center;
 }
-
-#divtablaborra table thead th{
-    background-color: gray;
-}
-
-#divtablaborra table tbody tr td{
-    background-color: white;
-    text-align: center;
-}
-
-#divtablaborra table{
-    width: 100%;
-}

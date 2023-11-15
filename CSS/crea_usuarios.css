@@ -53,16 +53,3 @@
     align-items: center; /* Centrar horizontalmente */
     justify-content: center;
 }
-
-#divcrea table thead th{
-    background-color: gray;
-}
-
-#divcrea table tbody tr td{
-    background-color: white;
-    text-align: center;
-}
-
-#divcrea table{
-    width: 100%;
-}

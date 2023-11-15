@@ -1,0 +1,67 @@
+/*Alumno*/
+#menu{
+    background-color: #D0B97D;
+}
+
+#nav-alumno {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.elementos-alumno {
+    margin: 0; /* Ajusta el margen entre elementos según sea necesario */
+}
+
+.elementos_desplegable-alumno {
+    display: none;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.elementos-alumno:hover .elementos_desplegable-alumno {
+    display: block;
+}
+
+#loginalumno img{
+    width: 100%;
+    height: 100%;
+}
+
+#loginalumno{
+    height: 100%;
+}
+
+
+/*PROFESOR*/
+
+#menu-profesor{
+    background-color: white;
+}
+
+#nav-profesor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.elementos-profesor {
+    margin: 0; 
+}
+
+.link1 .boton-profesor{
+    background: none;
+    border: none;
+    font-size: large;
+    font-weight: bolder;
+    color: black;
+}
+
+#loginprofesor img{
+    width: 100%;
+    height: 100%;
+}
+
+#loginprofesor{
+    height: 100%;
+}

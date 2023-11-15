@@ -62,15 +62,6 @@ body{
     color: white;
 }
 
-#table thead th{
-    background-color: gray;
-}
-
-#table tbody tr td{
-    background-color: white;
-    text-align: center;
-}
-
 #divtabla{
     margin-top: 3%;
     display: flex;
@@ -78,10 +69,6 @@ body{
     align-items: center; /* Centrar horizontalmente */
     justify-content: center;
     border: 1px solid;
-}
-
-#divtabla table{
-    width: 100%;
 }
 
 #si{

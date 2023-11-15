@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="CSS/crea_examen.css">
     <script src="../Autoescuela/JS/EXAMEN_PILA.js"></script>
     <script src="../Autoescuela/JS/ROL_TEACHER.js"></script>
+    <link rel="stylesheet" href="../Autoescuela/CSS/tabla.css">
+    <link rel="stylesheet" href="../Autoescuela/CSS/header.css">
 </head>
 <body>
     <?php

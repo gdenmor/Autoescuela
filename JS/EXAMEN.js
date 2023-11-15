@@ -5,6 +5,9 @@ window.addEventListener("load",function(ev){
     var params=new URLSearchParams(this.window.location.search);
     var id=params.get('examen');
     var idUser=params.get('usuario');
+    container.style.marginLeft="25%";
+    var header=this.document.getElementsByTagName("header")[0];
+    header.style.display="none";
     
     
     this.fetch("../AUTOESCUELA/APIS/EXAMENAPI.php?id="+id,{
@@ -15,19 +18,25 @@ window.addEventListener("load",function(ev){
 
             const respuestasJSON = Array(preguntas.length).fill(0);
 
-            mostrarPregunta(divpreguntas, preguntas,container,respuestasJSON);
-            
-            muestraBotones(container);
-
             var divcont=this.document.createElement("div");
 
             for (let i=0;i<preguntas.length;i++){
                 var div=document.createElement("div");
                 div.innerHTML=i+1;
                 div.classList.add("divs");
-                div.style.border="apx solid black";
+                div.style.border="1px solid black";
+                div.style.width="1%";
                 divcont.appendChild(div);
             }
+
+            divcont.style.display="flex";
+            divcont.style.justifyContent="center";
+            divcont.style.flexDirection="column";
+
+            mostrarPregunta(divpreguntas, preguntas,container,respuestasJSON,divcont);
+            
+            muestraBotones(container);
+            
 
             container.appendChild(divcont);
 
@@ -81,7 +90,7 @@ window.addEventListener("load",function(ev){
                     if (dudosa[i].checked==true){
                         divselementos[i].style.backgroundColor="yellow";
                     }else{
-                        divselementos[i].style.backgroundColor="#83C2CF";
+                        divselementos[i].style.backgroundColor="white";
                     }
                 })
             }
@@ -115,7 +124,7 @@ window.addEventListener("load",function(ev){
         });
 
 
-        function mostrarPregunta(divpreguntas,preguntas,contenedor,respuestasJSON) {
+        function mostrarPregunta(divpreguntas,preguntas,contenedor,respuestasJSON,divcont) {
             var duracion = 1800; 
 
             var timerElement = document.getElementById('timer');
@@ -232,29 +241,34 @@ window.addEventListener("load",function(ev){
 
                 var borrar=document.createElement("div");
 
-                var inputborra=document.createElement("input");
-                inputborra.setAttribute("type", "button");
-                inputborra.setAttribute("value","BORRAR");
+                var inputborra=document.createElement("a");
+                inputborra.innerHTML="Borrar opción seleccionada";
                 inputborra.id="borra"+i;
+                inputborra.classList.add("borra");
 
+                var hijos=divcont.childNodes;
 
                 inputborra.addEventListener("click",function(ev){
                     ev.preventDefault();
                     for (let i=0;i<inputs.length;i++){
                         inputs[i].checked=false;
+                        hijos[j].style.backgroundColor="white";
                         console.log(inputs[i]);
                     }
                 });
-
+                
                 for (let j=0;j<inputs.length;j++){
                     inputs[j].addEventListener("change",function(){
                         var selectedIndex=j;
                         if (inputs[j].checked==true){
                             if (j==0){
+                                hijos[j].style.backgroundColor="gray";
                                 respuestasJSON[i]=1;
                             }else if (j==1){
+                                hijos[j].style.backgroundColor="gray";
                                 respuestasJSON[i]=2;
                             }else if (j==2){
+                                hijos[j].style.backgroundColor="gray";
                                 respuestasJSON[i]=3;
                             }
                         }
