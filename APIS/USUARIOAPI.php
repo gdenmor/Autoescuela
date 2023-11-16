@@ -14,13 +14,11 @@
         $id=$_GET["id"];
         $usuario=json_decode($cuerpo);
         USER_REPOSITORY::UpdateById($id,$usuario);
-        echo "Usuario actualizado";
     }
     //BORRA
     if ($_SERVER["REQUEST_METHOD"]=="DELETE"){
         $id=$_GET["id"];
         USER_REPOSITORY::DeleteById($id);
-        echo "Usuario borrado";
     }
     //AÑADE
     if ($_SERVER["REQUEST_METHOD"]=="POST"){

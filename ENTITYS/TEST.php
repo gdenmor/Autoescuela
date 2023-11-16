@@ -1,5 +1,5 @@
 <?php
-    class TEST{
+    class TEST implements \JsonSerializable{
         private $id;
         private $fechahora;
         private $Intento=[];
@@ -56,6 +56,15 @@
 
         public function getPreguntas(){
             return $this->Preguntas;
+        }
+
+        public function toJSON(){
+            return json_encode(get_object_vars($this));
+        }
+
+        public function jsonSerialize(){
+            $var=get_object_vars($this);
+            return $var;
         }
     }
 

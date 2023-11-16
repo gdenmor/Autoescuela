@@ -21,6 +21,12 @@
 
 .elementos-alumno:hover .elementos_desplegable-alumno {
     display: block;
+    position: absolute;
+    margin: 0;
+}
+
+.elementos-alumno{
+    border: 2px solid #f58611;
 }
 
 #loginalumno img{
@@ -30,6 +36,10 @@
 
 #loginalumno{
     height: 100%;
+}
+
+#nav-alumno{
+    background-color: white;
 }
 
 
@@ -46,7 +56,9 @@
 }
 
 .elementos-profesor {
-    margin: 0; 
+    margin: 0;
+    border: 3px solid #f58611;
+    overflow: hidden;
 }
 
 .link1 .boton-profesor{
@@ -60,8 +72,17 @@
 #loginprofesor img{
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
-#loginprofesor{
-    height: 100%;
+#header{
+    border: 2px solid #f58611;
+}
+
+.link2 .boton-profesor{
+    background: none;
+    border: none;
+    font-size: large;
+    font-weight: bolder;
+    color: black;
 }

@@ -25,6 +25,7 @@
     <script src="../Autoescuela/JS/ROL_TEACHER.js"></script>
     <link rel="stylesheet" href="../Autoescuela/CSS/tabla.css">
     <link rel="stylesheet" href="../Autoescuela/CSS/header.css">
+    <link rel="stylesheet" href="../Autoescuela/CSS/footer.css">
 </head>
 <body>
     <?php
@@ -34,6 +35,10 @@
     <?php
         require_once "HELPERS/AUTOLOAD.php";
         require_once "HELPERS/ENROUTE.php";
+    ?>
+    <?php
+        require_once "HELPERS/AUTOLOAD.php";
+        require_once "footer.php";
     ?>
 </body>
 </html>

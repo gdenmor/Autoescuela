@@ -6,44 +6,16 @@
         $id=$_GET["id"];
         $Intento=TRY_REPOSITORY::FindBy($id);
         if ($Intento!=null){
-            $Int= new stdClass();
-            $Int->id=$id;
-
-            $Usuario=$Intento->getUser();
-
-            $User=new stdClass();
-            $User->id=$Usuario->getId();
-            $User->nombre=$Usuario->getUsername();
-            $User->password=$Usuario->getPassword();
-            $User->rol=$Usuario->getRol();
-
-            $Userss=new stdClass();
-            $Userss->usuarios=$User;
-
-            $Int->usuarios=$Userss;
-            $JSONRespuestas=$Intento->getJsonFileRespuestas();
-            $JSON=new stdClass();
-            $JSON->jsonrespuestas=$JSONRespuestas;
-            $Int->JSONrespuestas=$JSON;
-            $Int->fechaRealizado=$Intento->getfecha();
-
-            $Int->idExamen=$Intento->getIdExamen();
+            $Int= $Intento->toJSON();
+            echo $Int;
         }
         
-
-
-
-        echo json_encode($Int);
     }
     //ACTUALIZA
     if ($_SERVER["REQUEST_METHOD"]=="PUT"){
-        $_PUT = array();
         $cuerpo = file_get_contents("php://input");
-        $id=$_GET["id"];
-        parse_str($cuerpo, $_PUT);
-        $_PUT['id'] = $id;
+        $Pregunta=json_decode($cuerpo);
         TRY_REPOSITORY::UpdateById($id,$Pregunta);
-        echo "Pregunta actualizada";
     }
     //BORRA
     if ($_SERVER["REQUEST_METHOD"]=="DELETE"){

@@ -9,42 +9,42 @@
 
             if ($Examen!=null) {
                 $Ex = new stdClass();
-            $Ex->id = $id;
+                $Ex->id = $id;
     
-            $Preguntas = $Examen->getPreguntas();
-            $Preguntass = [];
+                $Preguntas = $Examen->getPreguntas();
+                $Preguntass = [];
     
-            foreach ($Preguntas as $pregunta) {
-                $respuesta1 = $pregunta->getr1();
-                $respuesta2= $pregunta->getrep2();
-                $respuesta3=$pregunta->getrep3();
-                $respuestas = [$respuesta1,$respuesta2,$respuesta3];
-                $respuestasArray=[];
+                foreach ($Preguntas as $pregunta) {
+                    $respuesta1 = $pregunta->getr1();
+                    $respuesta2= $pregunta->getrep2();
+                    $respuesta3=$pregunta->getrep3();
+                    $respuestas = [$respuesta1,$respuesta2,$respuesta3];
+                    $respuestasArray=[];
 
-                $i=1;
-    
-                foreach ($respuestas as $respuesta) {
-                    $respuestasArray[] = [
-                        "respuesta".$i => $respuesta
-                    ];
-                    $i++;
-                }
-    
-                $Preguntass[] = [
-                    "id" => $pregunta->getId(),
-                    "Categoria" => $pregunta->getCategoria(),
-                    "Dificultad" => $pregunta->getDificultad(),
-                    "enunciado" => $pregunta->getEnunciado(),
-                    "imagen" => $pregunta->getUrl(),
-                    "tipo" => $pregunta->getTipo(),
-                    "respuestas" => $respuestasArray
-            ];
-        }
-    
-        $Ex->preguntas = $Preguntass;
+                    $i=1;
+        
+                    foreach ($respuestas as $respuesta) {
+                        $respuestasArray[] = [
+                            "respuesta".$i => $respuesta
+                        ];
+                        $i++;
+                    }
+        
+                    $Preguntass[] = [
+                        "id" => $pregunta->getId(),
+                        "Categoria" => $pregunta->getCategoria(),
+                        "Dificultad" => $pregunta->getDificultad(),
+                        "enunciado" => $pregunta->getEnunciado(),
+                        "imagen" => $pregunta->getUrl(),
+                        "tipo" => $pregunta->getTipo(),
+                        "respuestas" => $respuestasArray
+                ];
             }
-    
-        echo json_encode(["Examen" => $Ex]);
+        
+            $Ex->preguntas = $Preguntass;
+            }
+        
+            echo json_encode(["Examen" => $Ex]);
 
         }
         

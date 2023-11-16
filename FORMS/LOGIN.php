@@ -21,7 +21,7 @@
                     if (is_array($Usuarios) &&count($Usuarios)> 0) {
 
                         for ($i = 0; $i < count($Usuarios); $i++) {
-                            if (strtoupper(str_replace(" ","",$Usuarios[$i]->getUsername())) == $usuario && strtoupper(str_replace(" ","",$Usuarios[$i]->getPassword()))) {
+                            if (strtoupper(str_replace(" ","",$Usuarios[$i]->getUsername())) == $usuario && strtoupper(str_replace(" ","",$Usuarios[$i]->getPassword())) == $password) {
                                 $User = $Usuarios[$i];
                                 $existe = true;
                                 $i=999;

@@ -1,13 +1,14 @@
 window.addEventListener("load",function(){
 
     const filas=this.document.getElementsByClassName("Examenes");
+    var idUser=document.getElementById("User");
 
     for (let i=0;i<filas.length;i++){
         filas[i].addEventListener("click",function(){
             var idExamen=filas[i].textContent.trim();
             var idExamenes = idExamen.match(/\d+/);
-            var idUser=document.getElementById("idUser").value;
-            window.location.href = 'http://localhost/AUTOESCUELA/index.php?menu=examen&&examen='+idExamenes+"&&usuario="+idUser;
+            var User=idUser.value;
+            window.location.href = 'http://localhost/AUTOESCUELA/index.php?menu=examen&&examen='+idExamenes+"&&usuario="+User;
         })
 
     }

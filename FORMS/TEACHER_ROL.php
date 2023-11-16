@@ -8,13 +8,6 @@
             SESSION::Cerrar_Sesion();
         }
     }
-
-    if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        $logout=$_POST['logout'];
-        if ($logout){
-            SESSION::Cerrar_Sesion();
-        }
-    }
 ?>
 
 <div>

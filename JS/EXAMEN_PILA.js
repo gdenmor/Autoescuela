@@ -15,7 +15,6 @@ window.addEventListener("load",function(){
         for (let j=0;j<datos.length;j++){
             if (j==11){
                 const input=datos[j].firstElementChild;
-                console.log(input);
                 input.addEventListener("change",function(){
                     var indice=i;
                     if (input.checked==true){

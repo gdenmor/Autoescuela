@@ -1,5 +1,5 @@
 <?php
-    class TRYS{
+    class TRYS implements \JsonSerializable{
         private $idTry;
         private $User;
         private $fecha;
@@ -63,6 +63,15 @@
 
         public function getfecha(){
             return $this->fecha;
+        }
+
+        public function toJSON(){
+            return json_encode(get_object_vars($this));
+        }
+
+        public function jsonSerialize(){
+            $var=get_object_vars($this);
+            return $var;
         }
     }
 

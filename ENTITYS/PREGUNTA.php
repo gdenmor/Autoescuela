@@ -1,5 +1,5 @@
 <?php
-    class PREGUNTA{
+    class PREGUNTA implements \JsonSerializable{
         private $id;
         private $Categoria;
         private $Dificultad;
@@ -101,6 +101,15 @@
             $this->correcta = $correcta;
             $this->url = $url;
             $this->tipo = $tipo;
+        }
+
+        public function toJSON(){
+            return json_encode(get_object_vars($this));
+        }
+
+        public function jsonSerialize(){
+            $var=get_object_vars($this);
+            return $var;
         }
     }
 

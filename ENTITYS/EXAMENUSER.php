@@ -1,5 +1,5 @@
 <?php
-    class ExamenUser {
+    class ExamenUser implements \JsonSerializable{
         private $Examen;
         private $Usuario;
     
@@ -16,6 +16,15 @@
     
         public function getUsuario() {
             return $this->Usuario;
+        }
+
+        public function toJSON(){
+            return json_encode(get_object_vars($this));
+        }
+
+        public function jsonSerialize(){
+            $var=get_object_vars($this);
+            return $var;
         }
     
     }

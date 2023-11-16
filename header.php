@@ -3,7 +3,6 @@
                 SESSION::CreaSesion();
 
                 
-
                 if(SESSION::estaLogueado('USER'))
                 {
                     $usuario =SESSION::leer_session('USER');
@@ -11,14 +10,23 @@
                         $rol = $usuario->getRol();
                         if($rol == "ALUMNO")
                         {
+                            if ($_GET['menu']=="examen"||$_GET['menu']=="visualizacion"){
+
+                            }else{
+                                if ($_SERVER["REQUEST_METHOD"]=="POST"){
+                                    $logout=$_POST['logout'];
+                                    if ($logout){
+                                        SESSION::Cerrar_Sesion();
+                                    }
+                                }
                             ?>
                                 <div id="menu">
                                     <nav id="nav-alumno">
                                         <div class="elementos-profesor" id="loginalumno">
                                             <img src="IMAGES/LOGO.png">
                                         </div>
-                                        <div class="elementos-profesor">
-                                            <a class="link1"><input type="button" class="boton-alumno" value="GENERAR EXAMENES"></input></a>
+                                        <div class="elementos-alumno">
+                                            <a class="link1"><input type="button" class="boton-profesor" value="GENERAR EXAMENES"></input></a>
                                             <div class="elementos_desplegable-alumno">
                                                 <div class="elementos-alumno">
                                                     <a class="dificultad"><b>FÁCIL</b></a>
@@ -32,7 +40,7 @@
                                             </div>
                                         </div>
                                         <div class="elementos-alumno">
-                                            <a class="link1"><input type="button" class="boton-alumno" value="REPETIR EXAMEN"></input></a>
+                                            <a class="link1"><input type="button" class="boton-profesor" value="REPETIR EXAMEN"></input></a>
                                             <div class="elementos_desplegable-alumno">
                                                 <?php 
                                                     $user=SESSION::leer_session('USER');
@@ -49,17 +57,30 @@
                                             </div>
                                         </div>
                                     <form method="post">
-                                        <div id="elementos-alumno">
-                                            <a class="link1"><input type="button" name="logout" class="boton-alumno" value="CERRAR SESIÓN"></input></a>
+                                        <div class="elementos-alumno">
+                                            <a class="link2"><input type="submit" name="logout" class="boton-profesor" value="CERRAR SESIÓN"></input></a>
                                         </div>
                                     </form>
                                     </nav>
                                 </div>
+                            
                             <?php
+                        }
                         }
 
                         if($rol == "PROFESOR")
                         {
+                            if ($_GET['menu']=="examen"||$_GET['menu']=="visualizacion"){
+                            ?>
+                            
+                            <?php
+                            }else{
+                                if ($_SERVER["REQUEST_METHOD"]=="POST"){
+                                    $logout=$_POST['logout'];
+                                    if ($logout){
+                                        SESSION::Cerrar_Sesion();
+                                    }
+                                }
                             ?>
                                 <div id="menu-profesor">
                                     <nav id="nav-profesor">
@@ -72,24 +93,31 @@
                                         <div class="elementos-profesor">
                                             <a class="link1" href="http://localhost/AUTOESCUELA/index.php?menu=preguntas"><input type="button" class="boton-profesor" value="CREAR PREGUNTAS"></input></a>
                                         </div>
-                                        <div id="elementos-profesor">
-                                            <a class="link1" href="http://localhost/AUTOESCUELA/index.php?menu=creaexamen"><input type="button" name="logout" class="boton-profesor" value="GENERAR EXAMENES SIN PILA DE PREGUNTAS"></input></a>
-                                        </div>
                                     <form method="post">
                                         <div id="elementos-profesor">
-                                            <a><input name="logout" type="button" name="logout" class="boton-alumno" value="CERRAR SESIÓN"></input></a>
+                                            <a class="link2"><input name="logout" type="submit" name="logout" class="boton-profesor" value="CERRAR SESIÓN"></input></a>
                                         </div>
                                     </form>
                                     </nav>
                                 </div>
-                            <?php
+                                <?php
+                            }
+                            
                         }
 
                         if($rol == "ADMINISTRADOR")
                         {
                             ?>
+                            <?php
+                                if ($_SERVER["REQUEST_METHOD"]=="POST"){
+                                    $logout=$_POST['logout'];
+                                    if ($logout){
+                                        SESSION::Cerrar_Sesion();
+                                    }
+                                }
+                            ?>
                                 <nav id="navegacion">
-                                    <div id="si">
+                                    <div class="elementos-profesor">
                                         <a class="link1" href="http://localhost/AUTOESCUELA/index.php?menu=admin"><img src="../AUTOESCUELA/IMAGES/LOGO.png"></a>
                                     </div>
                                     <div class="elementos-profesor">
@@ -107,9 +135,16 @@
                             <?php
                         }
 
+                        if (isset($_GET['menu']) && $_GET['menu'] === 'inicio') {
+                            session_destroy();
+                            header("Location: http://localhost/AUTOESCUELA/index.php");
+                            exit();
+                        }
+
 
 
                     }
+                
 
 ?>
         </nav>

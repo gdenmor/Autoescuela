@@ -9,7 +9,8 @@ window.addEventListener("load",function(){
     this.fetch("../AUTOESCUELA/APIS/INTENTOAPI.php?id="+id)
         .then(x=>x.json())
         .then(y=>{
-            const jsonrespuestas=y.JSONrespuestas.jsonrespuestas;
+            debugger;
+            const jsonrespuestas=y.JSONrespuestas;
             var respuestas=JSON.parse(jsonrespuestas);
             this.fetch("../AUTOESCUELA/APIS/EXAMENAPI.php?id="+examen)
                 .then(x=>x.json())

@@ -1,4 +1,14 @@
 <?php
+    SESSION::CreaSesion();
+    if (SESSION::estaLogueado('USER')==false){
+        SESSION::Cerrar_Sesion();
+    }else{
+        $usuario=SESSION::leer_session('USER');
+        if ($usuario->getRol()!="PROFESOR"){
+            SESSION::Cerrar_Sesion();
+        }
+    }
+
     if ($_SERVER["REQUEST_METHOD"]=="POST"){
         $enunciado=$_POST['enunciado'];
         $rep1=$_POST['rep1'];

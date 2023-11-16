@@ -113,6 +113,15 @@
 
             $resultado=$conexion->exec("UPDATE USUARIO set nombre='$usuario', contraseña='$password', rol='$rol',validado='1' where id='$id'");
         }
+
+        public static function UpdateById2($id,$objetoActualizado){
+            $conexion=CONEXION::AbreConexion();
+            $usuario=$objetoActualizado->getUsername();
+            $password=$objetoActualizado->getPassword();
+            $rol=$objetoActualizado->getRol();
+
+            $resultado=$conexion->exec("UPDATE USUARIO set nombre='$usuario', contraseña='$password', rol='$rol',validado='1' where id='$id'");
+        }
         public static function Insert($objeto){
             $conexion=CONEXION::AbreConexion();
 
@@ -120,7 +129,7 @@
             $password=$objeto->password;
             $rol=$objeto->rol;
 
-            $resultado=$conexion->exec("INSERT INTO USUARIO (nombre, contraseña, rol) values (upper('$usuario'),upper('$password'),upper('$rol'))");
+            $resultado=$conexion->exec("INSERT INTO USUARIO (nombre, contraseña, rol,validado) values (upper('$usuario'),upper('$password'),upper('$rol'),1)");
         }
 
         public static function InsertRegistro($objeto){

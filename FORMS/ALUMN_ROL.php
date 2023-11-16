@@ -8,12 +8,6 @@
             SESSION::Cerrar_Sesion();
         }
     }
-    if ($_SERVER["REQUEST_METHOD"]=="POST"){
-        $logout=$_POST['logout'];
-        if ($logout){
-            SESSION::Cerrar_Sesion();
-        }
-    }
 ?>
     <div id="container-alumno">
         <?php
@@ -27,7 +21,7 @@
                             .$user->getUsername().'
                             <br> 
                             <b>AUTOESCUELA PROYECTO</b>
-                            <input id="idUser" type="hidden" value="'.$user->getId().'">
+                            <input id="User" type="hidden" value="'.$user->getId().'">
                         </div>
                     </div>
                 </div>';

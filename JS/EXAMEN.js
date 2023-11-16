@@ -9,7 +9,6 @@ window.addEventListener("load",function(ev){
     var header=this.document.getElementsByTagName("header")[0];
     header.style.display="none";
     
-    
     this.fetch("../AUTOESCUELA/APIS/EXAMENAPI.php?id="+id,{
     })
         .then(x=>x.json())
@@ -74,7 +73,6 @@ window.addEventListener("load",function(ev){
                 divs[j].classList.remove("OCULTA");
             },false);
 
-            alert(divselementos.length);
             for (let i=0;i<divselementos.length;i++){
                 divselementos[i].addEventListener("click",function(){
                     divs[j].classList.add("OCULTA");
@@ -86,7 +84,6 @@ window.addEventListener("load",function(ev){
             const dudosa=this.document.getElementsByClassName("DUDOSA");
             for (let i=0;i<dudosa.length;i++){
                 dudosa[i].addEventListener("change",function(){
-                    alert("Hola");
                     if (dudosa[i].checked==true){
                         divselementos[i].style.backgroundColor="yellow";
                     }else{
@@ -99,6 +96,7 @@ window.addEventListener("load",function(ev){
 
 
             var finalizar=this.document.getElementById("finalizar").addEventListener("click",function(){
+                debugger;
                 var fecha=new Date();
                 var string=fecha.getFullYear()+"-"+fecha.getMonth()+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
                     var intento={
@@ -116,6 +114,10 @@ window.addEventListener("load",function(ev){
                     })
                     
                         
+            });
+
+            this.window.addEventListener("beforeunload",function(){
+                this.localStorage.setItem('JSON'+idUser,respuestasJSON);
             })
 
 
@@ -125,9 +127,10 @@ window.addEventListener("load",function(ev){
 
 
         function mostrarPregunta(divpreguntas,preguntas,contenedor,respuestasJSON,divcont) {
-            var duracion = 1800; 
+            var duracion = 20; 
 
             var timerElement = document.getElementById('timer');
+            var countdown=document.getElementById("countdown");
             var interval = setInterval(function() {
                 if (duracion <= 0) {
                     clearInterval(interval);
@@ -158,7 +161,7 @@ window.addEventListener("load",function(ev){
                 var divpregunta = document.createElement("div");
                 var pregunta = preguntas[i];
                 var imagen = document.createElement("img");
-                if (pregunta.imagen!=null){
+                if (pregunta.imagen!=""){
                     var ruta = "../AUTOESCUELA/" + pregunta.imagen;
                     imagen.src = ruta;
                 }
@@ -259,21 +262,20 @@ window.addEventListener("load",function(ev){
                 
                 for (let j=0;j<inputs.length;j++){
                     inputs[j].addEventListener("change",function(){
-                        var selectedIndex=j;
-                        if (inputs[j].checked==true){
-                            if (j==0){
-                                hijos[j].style.backgroundColor="gray";
-                                respuestasJSON[i]=1;
-                            }else if (j==1){
-                                hijos[j].style.backgroundColor="gray";
-                                respuestasJSON[i]=2;
-                            }else if (j==2){
-                                hijos[j].style.backgroundColor="gray";
-                                respuestasJSON[i]=3;
+                        var selectedIndex = j;
+                        respuestasJSON[i] = selectedIndex + 1; // Ajusta el índice según tus necesidades
+                        for (let k = 0; k < inputs.length; k++) {
+                            if (k !== selectedIndex) {
+                                hijos[k].style.backgroundColor = "white";
+                            } else {
+                                hijos[k].style.backgroundColor = "gray";
                             }
                         }
                     })
                 }
+
+                divcont.style.display="flex";
+                divcont.style.flexDirection="column";
 
 
                 borrar.appendChild(inputborra);

@@ -1,3 +1,14 @@
+<?php
+    SESSION::CreaSesion();
+    if (SESSION::estaLogueado('USER')==false){
+        SESSION::Cerrar_Sesion();
+    }else{
+        $usuario=SESSION::leer_session('USER');
+        if ($usuario->getRol()!="PROFESOR"){
+            SESSION::Cerrar_Sesion();
+        }
+    }
+?>
 <div>
     <table id="tablapreg" border="1" style="text-align: center;">
         <thead>

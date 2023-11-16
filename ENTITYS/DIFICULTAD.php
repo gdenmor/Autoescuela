@@ -1,5 +1,5 @@
 <?php
-    class DIFICULTAD{
+    class DIFICULTAD implements \JsonSerializable{
         private $id;
         private $nombre;
 
@@ -26,6 +26,15 @@
 
         public function setID($id){
             $this->id = $id;
+        }
+
+        public function toJSON(){
+            return json_encode(get_object_vars($this));
+        }
+
+        public function jsonSerialize(){
+            $var=get_object_vars($this);
+            return $var;
         }
     }
 
